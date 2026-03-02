@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_mid_div.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -54,7 +55,32 @@
 
         </div><!-- end of Top Divider -->
 
-        
+        <div class="mid-div">
+            <!-- Left Box -->
+            <div class="leftbox">
+                <div class="quote1">
+                    <p>Unlock Unforgettable</p>
+                    <p>Events</p>
+                </div>
+                <div class="quote2">
+                    <p class="quote3">Your journey starts here. Discover seamless</p>
+                    <p class="quote4">planning, unique venues, and curated experiences.</p>
+                </div>
+                <div class="gsbtn">
+                    <button class="getstarted" onclick="">Get started →</button>
+                </div>
+            </div><!-- end of left box -->
+
+            <!-- Right Box with Slideshow -->
+            <div class="rightbox">
+                <div class="imagebox">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg.jpg') }}" alt="Image">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg2.png') }}" alt="Image">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg3.png') }}" alt="Image">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg4.png') }}" alt="Image">
+                </div>
+            </div><!-- end of right box -->
+        </div><!-- end of mid-div -->
         
     </div>
     <script src="{{ asset('javascript/Burger.js') }}"></script>
