@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/homePage_top_div.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -53,6 +53,9 @@
             </div>
 
         </div><!-- end of Top Divider -->
+
+        
+        
     </div>
     <script src="{{ asset('javascript/Burger.js') }}"></script>
 </body>
