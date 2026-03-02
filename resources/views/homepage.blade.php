@@ -43,14 +43,13 @@
                 <span></span>
                 <span></span>
                 <span></span>
+            </div>
 
-                    
             <!-- Dropdown Menu -->
             <div class="dropdown" id="menu">
-                <a href="#">Home</a>
-                <a href="#">Profile</a>
-                <a href="#">Settings</a>
-                <a href="#">Logout</a>
+                <div class="menu-header">Welcome</div>
+                <a href="#">Sign Up</a>
+                <a href="#">Sign In</a>
             </div>
 
         </div><!-- end of Top Divider -->
