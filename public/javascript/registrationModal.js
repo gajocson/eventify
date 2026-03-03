@@ -1,36 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Find the Sign Up link in your dropdown
-    const signupBtn = document.querySelector(".dropdown a[href='#']"); // or give it an id for clarity
+    const signupBtn = document.querySelector(".dropdown a[href='#']");
 
     signupBtn.addEventListener("click", function (e) {
-        e.preventDefault(); // prevent default link behavior
+        e.preventDefault();
 
-        // Fetch the modal HTML from the server
         fetch('/registration-modal')
-            .then(response => response.text())
+            .then(res => res.text())
             .then(html => {
-                // Insert the modal HTML at the end of the body
                 document.body.insertAdjacentHTML('beforeend', html);
-
                 const modalEl = document.getElementById('signupModal');
+
+                // Show the modal
+                const myModal = new bootstrap.Modal(modalEl);
+                myModal.show();
+
+                // Remove modal when hidden
+                modalEl.addEventListener('hidden.bs.modal', () => modalEl.remove());
 
                 // Attach password toggle
                 attachPasswordToggle(modalEl);
 
-                // Initialize and show the Bootstrap modal
-                const myModal = new bootstrap.Modal(modalEl);
-                myModal.show();
-
-                // Remove modal from DOM when hidden to avoid duplicates
-                modalEl.addEventListener('hidden.bs.modal', () => {
-                    modalEl.remove();
-                });
+                // Attach customer/business toggle
+                attachFormToggle();
             })
-            .catch(err => console.error('Failed to load modal:', err));
-    });
-});
+            .catch(err => console.error(err));
+    }); // <-- this closes signupBtn click listener
+}); // <-- this closes DOMContentLoaded listener
 
-// Function to attach password toggle for dynamically loaded modal
+// Password visibility
 function attachPasswordToggle(modalEl) {
     modalEl.querySelectorAll(".eye").forEach(icon => {
         icon.addEventListener("click", function () {
@@ -44,4 +41,26 @@ function attachPasswordToggle(modalEl) {
             }
         });
     });
+}
+
+// Switch Customer/Business form
+function attachFormToggle() {
+    const customerRadio = document.getElementById("customer");
+    const businessRadio = document.getElementById("organizer");
+    const customerFields = document.getElementById("customerFields");
+    const businessFields = document.getElementById("businessFields");
+
+    function updateForm() {
+        if (customerRadio.checked) {
+            customerFields.style.display = "block";
+            businessFields.style.display = "none";
+        } else {
+            customerFields.style.display = "none";
+            businessFields.style.display = "block";
+        }
+    }
+
+    customerRadio.addEventListener("change", updateForm);
+    businessRadio.addEventListener("change", updateForm);
+    updateForm(); // initial
 }

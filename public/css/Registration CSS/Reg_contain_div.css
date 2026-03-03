@@ -1,22 +1,43 @@
-/* Only apply modal styles inside .modal-content */
-.modal-content .right-box {
-    padding: 40px 30px;
-    background-color: white;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+/* Modal dialog - center it */
+#signupModal .modal-dialog {
     max-width: 500px;
-    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal content */
+#signupModal .modal-content {
+    width: 100%;
+    padding: 30px;
+    border-radius: 14px;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 500px;       /* ensures short forms are not too tiny */
+    max-height: 90vh;        /* modal won’t exceed 90% of viewport height */
+    overflow-y: auto;        /* scroll only if content exceeds max-height */
+}
+
+/* Right-box wrapper (if you keep it) */
+#signupModal .right-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* Titles inside modal */
-.modal-content .create {
+#signupModal .create {
     font-size: 36px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 5px;
 }
 
-.modal-content .account {
+#signupModal .account {
     text-align: center;
     font-size: 16px;
     margin-bottom: 25px;
@@ -25,40 +46,46 @@
 }
 
 /* User Type */
-.modal-content .user-type-selection {
+#signupModal .user-type-selection {
     display: flex;
     gap: 30px;
     margin-bottom: 20px;
 }
 
-.modal-content .radio-item {
+#signupModal .radio-item {
     display: flex;
     align-items: center;
     gap: 7px;
 }
 
-.modal-content .radio-item input[type="radio"] {
+#signupModal .radio-item input[type="radio"] {
     width: 20px;
     height: 20px;
     accent-color: #4f46e5;
     cursor: pointer;
 }
 
-.modal-content .radio-item label {
+#signupModal .radio-item label {
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
 }
 
+/* Customer / Business fields */
+#signupModal #customerFields,
+#signupModal #businessFields {
+    margin-bottom: 18px;
+}
+
 /* Name */
-.modal-content .name {
+#signupModal .name {
     display: flex;
     gap: 12px;
     margin-bottom: 18px;
 }
 
 /* Email + Password */
-.modal-content .EmailPass {
+#signupModal .EmailPass {
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -66,7 +93,7 @@
 }
 
 /* Inputs */
-.modal-content input {
+#signupModal input {
     width: 100%;
     height: 42px;
     padding: 0 14px;
@@ -76,22 +103,22 @@
     box-sizing: border-box;
 }
 
-.modal-content input:focus {
+#signupModal input:focus {
     outline: none;
     border-color: #4f46e5;
     box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
 /* Password Wrap */
-.modal-content .pass-wrap {
+#signupModal .pass-wrap {
     position: relative;
 }
 
-.modal-content .pass-wrap input {
+#signupModal .pass-wrap input {
     padding-right: 40px;
 }
 
-.modal-content .eye {
+#signupModal .eye {
     position: absolute;
     right: 12px;
     top: 50%;
@@ -101,35 +128,35 @@
     font-size: 18px;
 }
 
-.modal-content .eye:hover {
+#signupModal .eye:hover {
     color: #4f46e5;
 }
 
 /* Checkbox */
-.modal-content .checkbox-wrap {
+#signupModal .checkbox-wrap {
     display: flex;
     align-items: center;
     gap: 5px;
     margin: 18px 0;
 }
 
-.modal-content .checkbox-wrap input {
+#signupModal .checkbox-wrap input {
     width: auto;
     height: auto;
     accent-color: #4f46e5;
 }
 
-.modal-content .checkbox-wrap label {
+#signupModal .checkbox-wrap label {
     font-size: 16px;   
     color: #555;       
 }
 
-/* Button */
-.modal-content .button {
+/* Buttons */
+#signupModal .button {
     width: 100%;
 }
 
-.modal-content .createbtn {
+#signupModal .createbtn {
     width: 100%;
     padding: 12px;
     background-color: #4f46e5;
@@ -141,37 +168,37 @@
     cursor: pointer;
 }
 
-.modal-content .createbtn:hover {
+#signupModal .createbtn:hover {
     background-color: #4338ca;
 }
 
 /* Divider */
-.modal-content .or-divider {
+#signupModal .or-divider {
     display: flex;
     align-items: center;
     margin: 30px 0;
 }
 
-.modal-content .divider-line {
+#signupModal .divider-line {
     flex: 1;
     height: 1px;
     background-color: #e0e0e0;
 }
 
-.modal-content .or-text {
+#signupModal .or-text {
     padding: 0 12px;
     color: #888;
     font-size: 13px;
 }
 
-/* Social */
-.modal-content .social-buttons {
+/* Social Buttons */
+#signupModal .social-buttons {
     display: flex;
     gap: 15px;
     justify-content: center;
 }
 
-.modal-content .social-btn {
+#signupModal .social-btn {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -182,10 +209,10 @@
     cursor: pointer;
 }
 
-.modal-content .social-btn:hover {
+#signupModal .social-btn:hover {
     background-color: #e2e8f0;
 }
 
-.modal-content .social-btn img {
+#signupModal .social-btn img {
     width: 22px;
 }
