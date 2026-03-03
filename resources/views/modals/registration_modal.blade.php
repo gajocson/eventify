@@ -9,6 +9,29 @@
 
       <div class="modal-body">
 
+        <!-- Flash / Validation Messages -->
+        @if(session('success'))
+            <div class="alert alert-success" id="registrationSuccess">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger" id="registrationError">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger" id="validationErrors">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <!-- Radio buttons to select type -->
         <div class="user-type-selection">
           <div class="radio-item">
@@ -22,71 +45,74 @@
         </div>
 
         <!-- Customer Form -->
-        <form id="customerFields">
-          <p class="create">Create an account</p>
-          <p class="account">Already have an account? <a href="#">Sign In</a></p>
+        <form id="customerFields" method="POST" action="{{ route('register.customer') }}">
+            @csrf
+            <div id="customerMessages"></div> <!-- new container for messages -->
 
-          <div class="name">
-            <input type="text" name="firstname" placeholder="First Name" required>
-            <input type="text" name="lastname" placeholder="Last Name" required>
-          </div>
+            <p class="create">Create an account</p>
+            <p class="account">Already have an account? <a href="#">Sign In</a></p>
 
-          <div class="EmailPass">
-            <input type="email" name="email" placeholder="Email" required>
-            <div class="pass-wrap">
-              <input type="password" id="password" placeholder="Password" required>
-              <span class="material-symbols-outlined eye" data-target="password">visibility_off</span>
+            <div class="name mb-2">
+                <input type="text" name="first_name" placeholder="First Name" required class="form-control mb-1">
+                <input type="text" name="last_name" placeholder="Last Name" required class="form-control">
             </div>
-            <div class="pass-wrap">
-              <input type="password" id="conPass" placeholder="Confirm Password" required>
-              <span class="material-symbols-outlined eye" data-target="conPass">visibility_off</span>
+
+            <div class="EmailPass mb-2">
+                <input type="email" name="email" placeholder="Email" required class="form-control mb-1">
+                <input type="text" name="phone" placeholder="Phone (optional)" class="form-control mb-1">
+
+                <div class="pass-wrap mb-1">
+                    <input type="password" name="password" placeholder="Password" required class="form-control">
+                    <span class="material-symbols-outlined eye" data-target="customerPassword">visibility_off</span>
+                </div>
+                <div class="pass-wrap">
+                    <input type="password" name="password_confirmation" placeholder="Confirm Password" required class="form-control">
+                    <span class="material-symbols-outlined eye" data-target="customerConPass">visibility_off</span>
+                </div>
             </div>
-          </div>
 
-          <div class="checkbox-wrap">
-            <input type="checkbox" id="terms" required>
-            <label for="terms">I accept the terms and conditions</label>
-          </div>
+            <div class="checkbox-wrap mb-2">
+                <input type="checkbox" name="terms" id="terms" required>
+                <label for="terms">I accept the terms and conditions</label>
+            </div>
 
-          <div class="button">
-            <button type="submit" class="createbtn">Create Account</button>
-          </div>
+            <div class="button">
+                <button type="submit" class="createbtn btn btn-primary w-100">Create Account</button>
+            </div>
         </form>
 
         <!-- Business Form -->
-        <form id="businessFields" style="display:none;">
+        <form id="businessFields" method="POST" action="{{ route('register.business') }}" style="display:none;">
+            @csrf
+            <div id="businessMessages"></div> <!-- new container for messages -->
+
             <p class="create">Register your business</p>
 
-            <div class="name">
-                <input type="text" name="business_name" placeholder="Business Name" required>
+            <div class="name mb-2">
+                <input type="text" name="business_name" placeholder="Business Name" required class="form-control mb-1">
+                <input type="tel" name="business_cont_num" placeholder="Phone Number" required pattern="09[0-9]{9}" class="form-control">
             </div>
 
-            <!-- Phone Number -->
-            <div class="name">
-                <input type="tel" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
-            </div>
+            <div class="EmailPass mb-2">
+                <input type="email" name="business_email" placeholder="Email" required class="form-control mb-1">
 
-            <div class="EmailPass">
-                <input type="email" name="email" placeholder="Email" required>
-                
-                <div class="pass-wrap">
-                <input type="password" id="businessPassword" placeholder="Password" required>
-                <span class="material-symbols-outlined eye" data-target="businessPassword">visibility_off</span>
+                <div class="pass-wrap mb-1">
+                    <input type="password" name="password" placeholder="Password" required class="form-control">
+                    <span class="material-symbols-outlined eye" data-target="businessPassword">visibility_off</span>
                 </div>
-
                 <div class="pass-wrap">
-                <input type="password" id="businessConPass" placeholder="Confirm Password" required>
-                <span class="material-symbols-outlined eye" data-target="businessConPass">visibility_off</span>
+                    <input type="password" name="password_confirmation" placeholder="Confirm Password" required class="form-control">
+                    <span class="material-symbols-outlined eye" data-target="businessConPass">visibility_off</span>
                 </div>
             </div>
 
-            <div class="checkbox-wrap">
-                <input type="checkbox" id="termsBusiness" required>
+            <div class="checkbox-wrap mb-2">
+                <input type="checkbox" name="termsBusiness" id="termsBusiness" required>
                 <label for="termsBusiness">I accept the terms and conditions</label>
             </div>
 
             <div class="button">
-                <button type="submit" class="createbtn">Create Account</button>
+                <button type="submit" class="createbtn btn btn-primary w-100">Create Account</button>
             </div>
         </form>
 
