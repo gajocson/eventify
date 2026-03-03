@@ -1,0 +1,191 @@
+/* Only apply modal styles inside .modal-content */
+.modal-content .right-box {
+    padding: 40px 30px;
+    background-color: white;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Titles inside modal */
+.modal-content .create {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.modal-content .account {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 25px;
+    margin-top: auto;
+    color: #666;
+}
+
+/* User Type */
+.modal-content .user-type-selection {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.modal-content .radio-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.modal-content .radio-item input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #4f46e5;
+    cursor: pointer;
+}
+
+.modal-content .radio-item label {
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Name */
+.modal-content .name {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+/* Email + Password */
+.modal-content .EmailPass {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+/* Inputs */
+.modal-content input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+/* Password Wrap */
+.modal-content .pass-wrap {
+    position: relative;
+}
+
+.modal-content .pass-wrap input {
+    padding-right: 40px;
+}
+
+.modal-content .eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    font-size: 18px;
+}
+
+.modal-content .eye:hover {
+    color: #4f46e5;
+}
+
+/* Checkbox */
+.modal-content .checkbox-wrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 18px 0;
+}
+
+.modal-content .checkbox-wrap input {
+    width: auto;
+    height: auto;
+    accent-color: #4f46e5;
+}
+
+.modal-content .checkbox-wrap label {
+    font-size: 16px;   
+    color: #555;       
+}
+
+/* Button */
+.modal-content .button {
+    width: 100%;
+}
+
+.modal-content .createbtn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.modal-content .createbtn:hover {
+    background-color: #4338ca;
+}
+
+/* Divider */
+.modal-content .or-divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.modal-content .divider-line {
+    flex: 1;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.modal-content .or-text {
+    padding: 0 12px;
+    color: #888;
+    font-size: 13px;
+}
+
+/* Social */
+.modal-content .social-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.modal-content .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background-color: #f1f5f9;
+    cursor: pointer;
+}
+
+.modal-content .social-btn:hover {
+    background-color: #e2e8f0;
+}
+
+.modal-content .social-btn img {
+    width: 22px;
+}
