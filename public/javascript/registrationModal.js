@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 const myModal = new bootstrap.Modal(modalEl);
                 myModal.show();
 
+                // Remove modal from DOM when hidden
                 modalEl.addEventListener('hidden.bs.modal', () => modalEl.remove());
 
                 attachPasswordToggle(modalEl);
-                attachFormToggle();
+                attachFormToggle(modalEl);
                 bindAjaxForms(modalEl);
                 autoHideMessages(modalEl);
             })
@@ -41,11 +42,11 @@ function attachPasswordToggle(modalEl) {
 }
 
 // Switch Customer/Business form
-function attachFormToggle() {
-    const customerRadio = document.getElementById("customer");
-    const businessRadio = document.getElementById("organizer");
-    const customerFields = document.getElementById("customerFields");
-    const businessFields = document.getElementById("businessFields");
+function attachFormToggle(modalEl) {
+    const customerRadio = modalEl.querySelector("#customer");
+    const businessRadio = modalEl.querySelector("#organizer");
+    const customerFields = modalEl.querySelector("#customerFields");
+    const businessFields = modalEl.querySelector("#businessFields");
 
     function updateForm() {
         if (customerRadio.checked) {
@@ -76,12 +77,13 @@ function bindAjaxForms(modalEl) {
     const customerForm = modalEl.querySelector('#customerFields');
     const businessForm = modalEl.querySelector('#businessFields');
 
-    function submitForm(form) {
+    function submitForm(form, messagesContainerId) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Remove old alerts
-            modalEl.querySelectorAll('.alert').forEach(a => a.remove());
+            // Clear old alerts
+            const messagesContainer = form.querySelector(`#${messagesContainerId}`);
+            messagesContainer.innerHTML = '';
 
             const url = form.action;
             const formData = new FormData(form);
@@ -106,16 +108,16 @@ function bindAjaxForms(modalEl) {
                     const div = document.createElement('div');
                     div.classList.add('alert', 'alert-danger');
                     div.appendChild(ul);
-                    form.prepend(div);
+                    messagesContainer.appendChild(div);
+
+                    autoHideMessages(modalEl);
                 } else if (data.success) {
                     const div = document.createElement('div');
                     div.classList.add('alert', 'alert-success');
                     div.textContent = data.success;
-                    form.prepend(div);
+                    messagesContainer.appendChild(div);
 
-                    // Optionally reset form
                     form.reset();
-
                     autoHideMessages(modalEl);
                 }
             })
@@ -123,11 +125,12 @@ function bindAjaxForms(modalEl) {
                 const div = document.createElement('div');
                 div.classList.add('alert', 'alert-danger');
                 div.textContent = "Something went wrong. Please try again.";
-                form.prepend(div);
+                messagesContainer.appendChild(div);
             });
         });
     }
 
-    submitForm(customerForm);
-    submitForm(businessForm);
+    // Attach to both forms
+    submitForm(customerForm, 'customerMessages');
+    submitForm(businessForm, 'businessMessages');
 }

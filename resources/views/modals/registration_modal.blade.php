@@ -84,13 +84,13 @@
         <!-- Business Form -->
         <form id="businessFields" method="POST" action="{{ route('register.business') }}" style="display:none;">
             @csrf
-            <div id="businessMessages"></div> <!-- new container for messages -->
+            <div id="businessMessages"></div> <!-- container for messages -->
 
             <p class="create">Register your business</p>
 
             <div class="name mb-2">
                 <input type="text" name="business_name" placeholder="Business Name" required class="form-control mb-1">
-                <input type="tel" name="business_cont_num" placeholder="Phone Number" required pattern="09[0-9]{9}" class="form-control">
+                <input type="tel" name="business_cont_num" placeholder="Phone Number (optional)" class="form-control">
             </div>
 
             <div class="EmailPass mb-2">
