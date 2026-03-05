@@ -4,6 +4,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Login CSS/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_mid_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Registration CSS/Reg_contain_div.css') }}">
@@ -53,8 +54,8 @@
             <!-- Dropdown Menu -->
             <div class="dropdown" id="menu">
                 <div class="menu-header">Welcome</div>
-                <a href="#">Sign Up</a>
-                <a href="#">Sign In</a>
+                <a href="{{ route('register') }}">Sign Up</a>
+                <a href="#" data-open-signin>Sign In</a>
             </div>
 
         </div><!-- end of Top Divider -->
@@ -89,6 +90,12 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('javascript/Burger.js') }}"></script>
-    <script src="{{ asset('javascript/registrationModal.js') }}"></script>
+    <script src="{{ asset('javascript/loginModal.js') }}"></script>
+    <script>
+        window.signinRoutes = {
+            customer: "{{ route('login.customer') }}",
+            business: "{{ route('login.business') }}"
+        };
+    </script>
 </body>
 </html>

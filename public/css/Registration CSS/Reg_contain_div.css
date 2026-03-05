@@ -13,13 +13,16 @@
     padding: 30px;
     border-radius: 14px;
     background-color: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    min-height: 500px;       /* ensures short forms are not too tiny */
-    max-height: 90vh;        /* modal won’t exceed 90% of viewport height */
-    overflow-y: auto;        /* scroll only if content exceeds max-height */
+    min-height: 500px;
+    /* ensures short forms are not too tiny */
+    max-height: 90vh;
+    /* modal won't exceed 90% of viewport height */
+    overflow-y: auto;
+    /* scroll only if content exceeds max-height */
 }
 
 /* Right-box wrapper (if you keep it) */
@@ -147,8 +150,8 @@
 }
 
 #signupModal .checkbox-wrap label {
-    font-size: 16px;   
-    color: #555;       
+    font-size: 16px;
+    color: #555;
 }
 
 /* Buttons */

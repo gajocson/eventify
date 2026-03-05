@@ -15,7 +15,7 @@
 
         <form>
             <p class="create">Create an account</p>
-            <p class="account">Already have an account? <a href="#">Sign In</a></p>
+            <p class="account">Already have an account? <a href="#" data-open-signin>Sign In</a></p>
 
             <!-- User Type -->
             <div class="user-type-selection">
@@ -103,6 +103,15 @@
         });
     });
 </script>
+
+<script>
+  window.signinRoutes = {
+    customer: "{{ route('login.customer') }}",
+    business: "{{ route('login.business') }}"
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('javascript/loginModal.js') }}"></script>
 
 </body>
 </html>
