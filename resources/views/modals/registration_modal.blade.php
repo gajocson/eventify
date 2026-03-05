@@ -1,139 +1,156 @@
 <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content right-box">
+  <div class="modal-dialog modal-dialog-centered ev-modal-dialog">
+    <div class="modal-content ev-modal">
 
-      <div class="modal-header">
-        <h5 class="modal-title">Create Account</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+      <!-- Close button -->
+      <button type="button" class="ev-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
 
-      <div class="modal-body">
-
-        <!-- Flash / Validation Messages -->
-        @if(session('success'))
-            <div class="alert alert-success" id="registrationSuccess">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-danger" id="registrationError">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div class="alert alert-danger" id="validationErrors">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <!-- Radio buttons to select type -->
-        <div class="user-type-selection">
-          <div class="radio-item">
-            <input type="radio" id="customer" name="user_type" value="customer" checked>
-            <label for="customer">I am a Customer</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" id="organizer" name="user_type" value="organizer">
-            <label for="organizer">I am a Business</label>
+      <!-- Left: Brand panel -->
+      <div class="ev-brand">
+        <div class="ev-brand-inner">
+          <span class="ev-brand-icon">✦</span>
+          <h2 class="ev-brand-name">Eventify</h2>
+          <p class="ev-brand-tagline">Join thousands of hosts and attendees creating unforgettable moments.</p>
+          <div class="ev-brand-dots">
+            <span></span><span></span><span></span>
           </div>
         </div>
+      </div>
 
-        <!-- Customer Form -->
+      <!-- Right: Form panel -->
+      <div class="ev-form-panel">
+
+        <!-- Flash / Validation messages -->
+        <div class="ev-alerts">
+          @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+          @endif
+          @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+          @endif
+          @if($errors->any())
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+        </div>
+
+        <p class="ev-title">Create account</p>
+        <p class="ev-subtitle">Already have an account? <a href="#" id="switchToLogin">Sign in</a></p>
+
+        <!-- Account type pills -->
+        <div class="ev-type-pills">
+          <input type="radio" id="customer" name="user_type" value="customer" checked>
+          <label for="customer">I'm a Customer</label>
+          <input type="radio" id="organizer" name="user_type" value="organizer">
+          <label for="organizer">I'm a Business</label>
+        </div>
+
+        <!-- ── Customer Form ─────────────────────────────── -->
         <form id="customerFields" method="POST" action="{{ route('register.customer') }}">
-            @csrf
-            <div id="customerMessages"></div> <!-- new container for messages -->
+          @csrf
+          <div id="customerMessages"></div>
 
-            <p class="create">Create an account</p>
-            <p class="account">Already have an account? <a href="#" id="switchToLogin">Sign In</a></p>
+          <div class="ev-input-group">
 
-            <div class="name mb-2">
-                <input type="text" name="first_name" placeholder="First Name" required class="form-control mb-1">
-                <input type="text" name="last_name" placeholder="Last Name" required class="form-control">
+            <div class="ev-row">
+              <div class="ev-field">
+                <input type="text" name="first_name" placeholder="First name" required>
+              </div>
+              <div class="ev-field">
+                <input type="text" name="last_name" placeholder="Last name" required>
+              </div>
             </div>
 
-            <div class="EmailPass mb-2">
-                <input type="email" name="email" placeholder="Email" required class="form-control mb-1">
-                <input type="text" name="phone" placeholder="Phone (optional)" class="form-control mb-1">
-
-                <div class="pass-wrap mb-1">
-                    <input type="password" name="password" placeholder="Password" required class="form-control">
-                    <span class="material-symbols-outlined eye" data-target="customerPassword">visibility_off</span>
-                </div>
-                <div class="pass-wrap">
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password" required class="form-control">
-                    <span class="material-symbols-outlined eye" data-target="customerConPass">visibility_off</span>
-                </div>
+            <div class="ev-field">
+              <input type="email" name="email" placeholder="Email address" required>
             </div>
 
-            <div class="checkbox-wrap mb-2">
-                <input type="checkbox" name="terms" id="terms" required>
-                <label for="terms">I accept the terms and conditions</label>
+            <div class="ev-field">
+              <input type="text" name="phone" placeholder="Phone (optional)">
             </div>
 
-            <div class="button">
-                <button type="submit" class="createbtn btn btn-primary w-100">Create Account</button>
+            <div class="ev-field">
+              <input type="password" name="password" placeholder="Password" required class="has-eye">
+              <span class="material-symbols-outlined ev-eye">visibility_off</span>
             </div>
+
+            <div class="ev-field">
+              <input type="password" name="password_confirmation" placeholder="Confirm password" required class="has-eye">
+              <span class="material-symbols-outlined ev-eye">visibility_off</span>
+            </div>
+
+          </div>
+
+          <div class="ev-check">
+            <input type="checkbox" name="terms" id="terms" required>
+            <label for="terms">I accept the terms and conditions</label>
+          </div>
+
+          <button type="submit" class="ev-btn">Create Account</button>
         </form>
 
-        <!-- Business Form -->
+        <!-- ── Business Form ─────────────────────────────── -->
         <form id="businessFields" method="POST" action="{{ route('register.business') }}" style="display:none;">
-            @csrf
-            <div id="businessMessages"></div> <!-- container for messages -->
+          @csrf
+          <div id="businessMessages"></div>
 
-            <p class="create">Register your business</p>
+          <div class="ev-input-group">
 
-            <div class="name mb-2">
-                <input type="text" name="business_name" placeholder="Business Name" required class="form-control mb-1">
-                <input type="tel" name="business_cont_num" placeholder="Phone Number (optional)" class="form-control">
+            <div class="ev-field">
+              <input type="text" name="business_name" placeholder="Business name" required>
             </div>
 
-            <div class="EmailPass mb-2">
-                <input type="email" name="business_email" placeholder="Email" required class="form-control mb-1">
-
-                <div class="pass-wrap mb-1">
-                    <input type="password" name="password" placeholder="Password" required class="form-control">
-                    <span class="material-symbols-outlined eye" data-target="businessPassword">visibility_off</span>
-                </div>
-                <div class="pass-wrap">
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password" required class="form-control">
-                    <span class="material-symbols-outlined eye" data-target="businessConPass">visibility_off</span>
-                </div>
+            <div class="ev-field">
+              <input type="tel" name="business_cont_num" placeholder="Phone number (optional)">
             </div>
 
-            <div class="checkbox-wrap mb-2">
-                <input type="checkbox" name="termsBusiness" id="termsBusiness" required>
-                <label for="termsBusiness">I accept the terms and conditions</label>
+            <div class="ev-field">
+              <input type="email" name="business_email" placeholder="Email address" required>
             </div>
 
-            <div class="button">
-                <button type="submit" class="createbtn btn btn-primary w-100">Create Account</button>
+            <div class="ev-field">
+              <input type="password" name="password" placeholder="Password" required class="has-eye">
+              <span class="material-symbols-outlined ev-eye">visibility_off</span>
             </div>
+
+            <div class="ev-field">
+              <input type="password" name="password_confirmation" placeholder="Confirm password" required class="has-eye">
+              <span class="material-symbols-outlined ev-eye">visibility_off</span>
+            </div>
+
+          </div>
+
+          <div class="ev-check">
+            <input type="checkbox" name="termsBusiness" id="termsBusiness" required>
+            <label for="termsBusiness">I accept the terms and conditions</label>
+          </div>
+
+          <button type="submit" class="ev-btn">Register Business</button>
         </form>
 
-        <!-- Social buttons (always visible) -->
-        <div class="or-divider">
-          <span class="divider-line"></span>
-          <span class="or-text">or register with</span>
-          <span class="divider-line"></span>
+        <div class="ev-divider">
+          <span class="ev-divider-line"></span>
+          <span class="ev-divider-text">or continue with</span>
+          <span class="ev-divider-line"></span>
         </div>
-        <div class="social-buttons">
-          <button class="social-btn">
+
+        <div class="ev-social">
+          <button class="ev-social-btn">
             <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google">
-            <span>Google</span>
+            Google
           </button>
-          <button class="social-btn">
+          <button class="ev-social-btn">
             <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-            <span>Facebook</span>
+            Facebook
           </button>
         </div>
 
-      </div>
+      </div><!-- end ev-form-panel -->
     </div>
   </div>
 </div>

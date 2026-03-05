@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_mid_div.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/Registration CSS/Reg_contain_div.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/Login CSS/login_modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Modal CSS/ev_modal.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">

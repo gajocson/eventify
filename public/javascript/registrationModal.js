@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ── Password visibility toggle ─────────────────────────────────────────────
 function attachPasswordToggle(modalEl) {
-    modalEl.querySelectorAll('.pass-wrap .eye').forEach(icon => {
+    modalEl.querySelectorAll('.ev-field .ev-eye').forEach(icon => {
         icon.addEventListener('click', function () {
             const input = this.parentElement.querySelector('input');
             if (input.type === 'password') {

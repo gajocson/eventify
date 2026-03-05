@@ -1,0 +1,411 @@
+/* ================================================================
+   ev_modal.css — Shared design system for Eventify modals
+   Applies to: #loginModal, #signupModal
+   ================================================================ */
+
+/* ── Dialog sizing ─────────────────────────────────────────────── */
+.ev-modal-dialog {
+    max-width: 760px;
+    width: 100%;
+}
+
+/* ── Modal shell ───────────────────────────────────────────────── */
+.ev-modal {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 520px;
+    max-height: 90vh;
+    box-shadow: 0 25px 60px rgba(79, 70, 229, 0.18);
+    position: relative;
+}
+
+/* ── Close button ──────────────────────────────────────────────── */
+.ev-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.ev-close:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Left brand panel ──────────────────────────────────────────── */
+.ev-brand {
+    width: 260px;
+    flex-shrink: 0;
+    background: linear-gradient(145deg, #4f46e5 0%, #7c3aed 60%, #a855f7 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative circles */
+.ev-brand::before,
+.ev-brand::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.ev-brand::before {
+    width: 240px;
+    height: 240px;
+    top: -80px;
+    right: -80px;
+}
+
+.ev-brand::after {
+    width: 180px;
+    height: 180px;
+    bottom: -60px;
+    left: -60px;
+}
+
+.ev-brand-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+}
+
+.ev-brand-icon {
+    font-size: 52px;
+    line-height: 1;
+    margin-bottom: 14px;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+.ev-brand-name {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0 0 12px;
+    color: #fff;
+}
+
+.ev-brand-tagline {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+}
+
+.ev-brand-dots {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.ev-brand-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    display: inline-block;
+}
+
+.ev-brand-dots span:first-child {
+    background: #fff;
+    width: 22px;
+    border-radius: 4px;
+}
+
+/* ── Right form panel ──────────────────────────────────────────── */
+.ev-form-panel {
+    flex: 1;
+    padding: 36px 36px 30px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: #fff;
+}
+
+/* ── Form headings ─────────────────────────────────────────────── */
+.ev-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin: 0 0 4px;
+    letter-spacing: -0.4px;
+}
+
+.ev-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin: 0 0 24px;
+}
+
+.ev-subtitle a {
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ev-subtitle a:hover {
+    text-decoration: underline;
+}
+
+/* ── User-type radio pills ─────────────────────────────────────── */
+.ev-type-pills {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.ev-type-pills input[type="radio"] {
+    display: none;
+}
+
+.ev-type-pills label {
+    flex: 1;
+    text-align: center;
+    padding: 9px 0;
+    border-radius: 50px;
+    border: 2px solid #e2e8f0;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ev-type-pills input[type="radio"]:checked+label {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+}
+
+/* ── Inputs ────────────────────────────────────────────────────── */
+.ev-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.ev-row {
+    display: flex;
+    gap: 12px;
+}
+
+.ev-row .ev-field {
+    flex: 1;
+}
+
+.ev-field {
+    position: relative;
+}
+
+.ev-field input {
+    width: 100%;
+    height: 46px;
+    padding: 0 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 14.5px;
+    color: #1e1b4b;
+    background: #f8fafc;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    outline: none;
+}
+
+.ev-field input::placeholder {
+    color: #b0bac7;
+}
+
+.ev-field input:focus {
+    border-color: #4f46e5;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* password eye icon */
+.ev-field .ev-eye {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 19px;
+    user-select: none;
+    transition: color 0.2s;
+}
+
+.ev-field .ev-eye:hover {
+    color: #4f46e5;
+}
+
+.ev-field input.has-eye {
+    padding-right: 44px;
+}
+
+/* ── Forgot link ───────────────────────────────────────────────── */
+.ev-forgot {
+    text-align: right;
+    margin: -4px 0 16px;
+}
+
+.ev-forgot a {
+    font-size: 13px;
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.ev-forgot a:hover {
+    text-decoration: underline;
+}
+
+/* ── Checkbox ──────────────────────────────────────────────────── */
+.ev-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0 18px;
+}
+
+.ev-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #4f46e5;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.ev-check label {
+    font-size: 13.5px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+/* ── Primary button ────────────────────────────────────────────── */
+.ev-btn {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+}
+
+.ev-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.38);
+}
+
+.ev-btn:active {
+    transform: translateY(0);
+}
+
+/* ── Or divider ────────────────────────────────────────────────── */
+.ev-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.ev-divider-line {
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.ev-divider-text {
+    font-size: 12.5px;
+    color: #94a3b8;
+    white-space: nowrap;
+}
+
+/* ── Social buttons ────────────────────────────────────────────── */
+.ev-social {
+    display: flex;
+    gap: 12px;
+}
+
+.ev-social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.ev-social-btn:hover {
+    background: #fff;
+    border-color: #c7d2fe;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.1);
+}
+
+.ev-social-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ── Alert messages ────────────────────────────────────────────── */
+.ev-alerts {
+    margin-bottom: 14px;
+}
+
+/* ── Responsive — stack on small screens ───────────────────────── */
+@media (max-width: 600px) {
+    .ev-brand {
+        display: none;
+    }
+
+    .ev-modal-dialog {
+        max-width: 95vw;
+    }
+
+    .ev-form-panel {
+        padding: 28px 22px;
+    }
+
+    .ev-row {
+        flex-direction: column;
+    }
+}

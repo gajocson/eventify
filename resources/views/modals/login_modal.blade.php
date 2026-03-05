@@ -1,85 +1,85 @@
 <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content right-box">
+  <div class="modal-dialog modal-dialog-centered ev-modal-dialog">
+    <div class="modal-content ev-modal">
 
-      <div class="modal-header">
-        <h5 class="modal-title">Sign In</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Close button -->
+      <button type="button" class="ev-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+
+      <!-- Left: Brand panel -->
+      <div class="ev-brand">
+        <div class="ev-brand-inner">
+          <span class="ev-brand-icon">✦</span>
+          <h2 class="ev-brand-name">Eventify</h2>
+          <p class="ev-brand-tagline">Discover seamless planning, unique venues, and curated experiences.</p>
+          <div class="ev-brand-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
       </div>
 
-      <div class="modal-body">
+      <!-- Right: Form panel -->
+      <div class="ev-form-panel">
 
-        <!-- Flash / Validation Messages -->
-        @if(session('login_success'))
-            <div class="alert alert-success" id="loginSuccess">
-                {{ session('login_success') }}
-            </div>
-        @endif
+        <!-- Flash messages -->
+        <div class="ev-alerts">
+          @if(session('login_success'))
+            <div class="alert alert-success">{{ session('login_success') }}</div>
+          @endif
+          @if(session('login_error'))
+            <div class="alert alert-danger">{{ session('login_error') }}</div>
+          @endif
+        </div>
 
-        @if(session('login_error'))
-            <div class="alert alert-danger" id="loginError">
-                {{ session('login_error') }}
-            </div>
-        @endif
+        <p class="ev-title">Welcome back</p>
+        <p class="ev-subtitle">Don't have an account? <a href="#" id="switchToRegister">Sign up free</a></p>
 
-        @if($errors->any())
-            <div class="alert alert-danger" id="loginValidationErrors">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <!-- Login Form -->
         <form id="loginForm" method="POST" action="{{ route('login') }}">
-            @csrf
+          @csrf
 
-            <p class="create">Welcome Back</p>
-            <p class="account">Don't have an account? <a href="#" id="switchToRegister">Sign Up</a></p>
+          <div class="ev-input-group">
 
-            <div class="EmailPass mb-2">
-                <input type="email" name="email" placeholder="Email" required class="form-control mb-1">
-
-                <div class="pass-wrap mb-1">
-                    <input type="password" name="password" id="loginPassword" placeholder="Password" required class="form-control">
-                    <span class="material-symbols-outlined eye" data-target="loginPassword">visibility_off</span>
-                </div>
+            <div class="ev-field">
+              <input type="email" name="email" placeholder="Email address" required>
             </div>
 
-            <div class="forgot-wrap mb-2">
-                <a href="#" class="forgot-link">Forgot password?</a>
+            <div class="ev-field">
+              <input type="password" name="password" id="loginPassword" placeholder="Password" required class="has-eye">
+              <span class="material-symbols-outlined ev-eye" data-target="loginPassword">visibility_off</span>
             </div>
 
-            <div class="checkbox-wrap mb-2">
-                <input type="checkbox" name="remember" id="rememberMe">
-                <label for="rememberMe">Remember me</label>
-            </div>
+          </div>
 
-            <div class="button">
-                <button type="submit" class="createbtn btn btn-primary w-100">Sign In</button>
-            </div>
+          <div class="ev-forgot">
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <div class="ev-check">
+            <input type="checkbox" name="remember" id="rememberMe">
+            <label for="rememberMe">Remember me</label>
+          </div>
+
+          <button type="submit" class="ev-btn">Sign In</button>
+
         </form>
 
-        <!-- Social buttons -->
-        <div class="or-divider">
-          <span class="divider-line"></span>
-          <span class="or-text">or sign in with</span>
-          <span class="divider-line"></span>
+        <div class="ev-divider">
+          <span class="ev-divider-line"></span>
+          <span class="ev-divider-text">or continue with</span>
+          <span class="ev-divider-line"></span>
         </div>
-        <div class="social-buttons">
-          <button class="social-btn">
+
+        <div class="ev-social">
+          <button class="ev-social-btn">
             <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google">
-            <span>Google</span>
+            Google
           </button>
-          <button class="social-btn">
+          <button class="ev-social-btn">
             <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-            <span>Facebook</span>
+            Facebook
           </button>
         </div>
 
-      </div>
+      </div><!-- end ev-form-panel -->
     </div>
   </div>
 </div>
