@@ -19,3 +19,5 @@ Route::post('/register/customer', [CustomerController::class, 'register'])->name
 
 // Business registration
 Route::post('/register/business', [BusinessController::class, 'register'])->name('register.business');
+
+Route::post('/register/businesses', [BusinessController::class, 'register'])->name('register.business');
