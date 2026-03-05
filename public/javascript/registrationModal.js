@@ -1,78 +1,77 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const signupBtn = document.querySelector(".dropdown a[href='#']");
 
-    signupBtn.addEventListener("click", function (e) {
-        e.preventDefault();
+    const signupModalEl = document.getElementById('signupModal');
+    if (!signupModalEl) return;
 
-        fetch('/registration-modal')
-            .then(res => res.text())
-            .then(html => {
-                document.body.insertAdjacentHTML('beforeend', html);
-                const modalEl = document.getElementById('signupModal');
+    // ── Initialise all behaviours once ─────────────────────────────────────
+    attachPasswordToggle(signupModalEl);
+    attachFormToggle(signupModalEl);
+    bindAjaxForms(signupModalEl);
+    autoHideMessages(signupModalEl);
 
-                const myModal = new bootstrap.Modal(modalEl);
-                myModal.show();
+    // ── Switch: Sign In link inside registration modal → open login modal ──
+    const switchToLogin = document.getElementById('switchToLogin');
+    if (switchToLogin) {
+        switchToLogin.addEventListener('click', function (e) {
+            e.preventDefault();
+            const signupModal = bootstrap.Modal.getInstance(signupModalEl);
+            if (signupModal) signupModal.hide();
 
-                // Remove modal from DOM when hidden
-                modalEl.addEventListener('hidden.bs.modal', () => modalEl.remove());
-
-                attachPasswordToggle(modalEl);
-                attachFormToggle(modalEl);
-                bindAjaxForms(modalEl);
-                autoHideMessages(modalEl);
-            })
-            .catch(err => console.error(err));
-    });
+            const loginModalEl = document.getElementById('loginModal');
+            if (loginModalEl) {
+                const loginModal = new bootstrap.Modal(loginModalEl);
+                loginModal.show();
+            }
+        });
+    }
 });
 
-// Password visibility toggle
+// ── Password visibility toggle ─────────────────────────────────────────────
 function attachPasswordToggle(modalEl) {
-    modalEl.querySelectorAll(".pass-wrap .eye").forEach(icon => {
-        icon.addEventListener("click", function () {
+    modalEl.querySelectorAll('.pass-wrap .eye').forEach(icon => {
+        icon.addEventListener('click', function () {
             const input = this.parentElement.querySelector('input');
-            if (input.type === "password") {
-                input.type = "text";
-                this.textContent = "visibility";
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.textContent = 'visibility';
             } else {
-                input.type = "password";
-                this.textContent = "visibility_off";
+                input.type = 'password';
+                this.textContent = 'visibility_off';
             }
         });
     });
 }
 
-// Switch Customer/Business form
+// ── Switch Customer / Business form ───────────────────────────────────────
 function attachFormToggle(modalEl) {
-    const customerRadio = modalEl.querySelector("#customer");
-    const businessRadio = modalEl.querySelector("#organizer");
-    const customerFields = modalEl.querySelector("#customerFields");
-    const businessFields = modalEl.querySelector("#businessFields");
+    const customerRadio = modalEl.querySelector('#customer');
+    const businessRadio = modalEl.querySelector('#organizer');
+    const customerFields = modalEl.querySelector('#customerFields');
+    const businessFields = modalEl.querySelector('#businessFields');
 
     function updateForm() {
         if (customerRadio.checked) {
-            customerFields.style.display = "block";
-            businessFields.style.display = "none";
+            customerFields.style.display = 'block';
+            businessFields.style.display = 'none';
         } else {
-            customerFields.style.display = "none";
-            businessFields.style.display = "block";
+            customerFields.style.display = 'none';
+            businessFields.style.display = 'block';
         }
     }
 
-    customerRadio.addEventListener("change", updateForm);
-    businessRadio.addEventListener("change", updateForm);
+    customerRadio.addEventListener('change', updateForm);
+    businessRadio.addEventListener('change', updateForm);
     updateForm();
 }
 
-// Auto-hide messages after 5 seconds
+// ── Auto-hide flash messages after 5 s ────────────────────────────────────
 function autoHideMessages(modalEl) {
-    modalEl.querySelectorAll(".alert").forEach(alert => {
-        setTimeout(() => {
-            alert.style.display = 'none';
-        }, 5000);
+    modalEl.querySelectorAll('.alert').forEach(alert => {
+        setTimeout(() => { alert.style.display = 'none'; }, 5000);
     });
 }
 
-// AJAX form submission for both forms
+// ── AJAX form submission ───────────────────────────────────────────────────
 function bindAjaxForms(modalEl) {
     const customerForm = modalEl.querySelector('#customerFields');
     const businessForm = modalEl.querySelector('#businessFields');
@@ -81,56 +80,49 @@ function bindAjaxForms(modalEl) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Clear old alerts
             const messagesContainer = form.querySelector(`#${messagesContainerId}`);
             messagesContainer.innerHTML = '';
 
-            const url = form.action;
-            const formData = new FormData(form);
-
-            fetch(url, {
+            fetch(form.action, {
                 method: 'POST',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: formData
+                body: new FormData(form)
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.errors) {
-                    const ul = document.createElement('ul');
-                    data.errors.forEach(err => {
-                        const li = document.createElement('li');
-                        li.textContent = err;
-                        ul.appendChild(li);
-                    });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.errors) {
+                        const ul = document.createElement('ul');
+                        data.errors.forEach(err => {
+                            const li = document.createElement('li');
+                            li.textContent = err;
+                            ul.appendChild(li);
+                        });
+                        const div = document.createElement('div');
+                        div.classList.add('alert', 'alert-danger');
+                        div.appendChild(ul);
+                        messagesContainer.appendChild(div);
+                        autoHideMessages(modalEl);
+                    } else if (data.success) {
+                        const div = document.createElement('div');
+                        div.classList.add('alert', 'alert-success');
+                        div.textContent = data.success;
+                        messagesContainer.appendChild(div);
+                        form.reset();
+                        autoHideMessages(modalEl);
+                    }
+                })
+                .catch(() => {
                     const div = document.createElement('div');
                     div.classList.add('alert', 'alert-danger');
-                    div.appendChild(ul);
+                    div.textContent = 'Something went wrong. Please try again.';
                     messagesContainer.appendChild(div);
-
-                    autoHideMessages(modalEl);
-                } else if (data.success) {
-                    const div = document.createElement('div');
-                    div.classList.add('alert', 'alert-success');
-                    div.textContent = data.success;
-                    messagesContainer.appendChild(div);
-
-                    form.reset();
-                    autoHideMessages(modalEl);
-                }
-            })
-            .catch(err => {
-                const div = document.createElement('div');
-                div.classList.add('alert', 'alert-danger');
-                div.textContent = "Something went wrong. Please try again.";
-                messagesContainer.appendChild(div);
-            });
+                });
         });
     }
 
-    // Attach to both forms
     submitForm(customerForm, 'customerMessages');
     submitForm(businessForm, 'businessMessages');
 }

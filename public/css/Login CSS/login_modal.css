@@ -1,0 +1,195 @@
+/* Modal dialog - center it */
+#loginModal .modal-dialog {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal content */
+#loginModal .modal-content {
+    width: 100%;
+    padding: 30px;
+    border-radius: 14px;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Right-box wrapper */
+#loginModal .right-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Titles inside modal */
+#loginModal .create {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#loginModal .account {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 25px;
+    margin-top: auto;
+    color: #666;
+}
+
+/* Email + Password */
+#loginModal .EmailPass {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+/* Inputs */
+#loginModal input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#loginModal input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+/* Password Wrap */
+#loginModal .pass-wrap {
+    position: relative;
+}
+
+#loginModal .pass-wrap input {
+    padding-right: 40px;
+}
+
+#loginModal .eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    font-size: 18px;
+}
+
+#loginModal .eye:hover {
+    color: #4f46e5;
+}
+
+/* Forgot password link */
+#loginModal .forgot-wrap {
+    text-align: right;
+    margin-top: -6px;
+}
+
+#loginModal .forgot-link {
+    font-size: 14px;
+    color: #4f46e5;
+    text-decoration: none;
+}
+
+#loginModal .forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Checkbox */
+#loginModal .checkbox-wrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 18px 0;
+}
+
+#loginModal .checkbox-wrap input {
+    width: auto;
+    height: auto;
+    accent-color: #4f46e5;
+}
+
+#loginModal .checkbox-wrap label {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Buttons */
+#loginModal .button {
+    width: 100%;
+}
+
+#loginModal .createbtn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#loginModal .createbtn:hover {
+    background-color: #4338ca;
+}
+
+/* Divider */
+#loginModal .or-divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+}
+
+#loginModal .divider-line {
+    flex: 1;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+#loginModal .or-text {
+    padding: 0 12px;
+    color: #888;
+    font-size: 13px;
+}
+
+/* Social Buttons */
+#loginModal .social-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+#loginModal .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background-color: #f1f5f9;
+    cursor: pointer;
+}
+
+#loginModal .social-btn:hover {
+    background-color: #e2e8f0;
+}
+
+#loginModal .social-btn img {
+    width: 22px;
+}

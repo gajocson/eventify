@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_mid_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Registration CSS/Reg_contain_div.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Login CSS/login_modal.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -53,8 +54,8 @@
             <!-- Dropdown Menu -->
             <div class="dropdown" id="menu">
                 <div class="menu-header">Welcome</div>
-                <a href="#">Sign Up</a>
-                <a href="#">Sign In</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</a>
             </div>
 
         </div><!-- end of Top Divider -->
@@ -87,8 +88,14 @@
         </div><!-- end of mid-div -->
         
     </div>
+
+    {{-- Modals --}}
+    @include('modals.registration_modal')
+    @include('modals.login_modal')
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('javascript/Burger.js') }}"></script>
     <script src="{{ asset('javascript/registrationModal.js') }}"></script>
+    <script src="{{ asset('javascript/loginModal.js') }}"></script>
 </body>
 </html>

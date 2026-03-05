@@ -50,7 +50,7 @@
             <div id="customerMessages"></div> <!-- new container for messages -->
 
             <p class="create">Create an account</p>
-            <p class="account">Already have an account? <a href="#">Sign In</a></p>
+            <p class="account">Already have an account? <a href="#" id="switchToLogin">Sign In</a></p>
 
             <div class="name mb-2">
                 <input type="text" name="first_name" placeholder="First Name" required class="form-control mb-1">

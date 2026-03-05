@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\AuthController;
 
 
 Route::get('/', function () {
@@ -19,3 +20,7 @@ Route::post('/register/customer', [CustomerController::class, 'register'])->name
 
 // Business registration
 Route::post('/register/business', [BusinessController::class, 'register'])->name('register.business');
+
+// Login / Logout
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
