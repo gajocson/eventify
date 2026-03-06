@@ -10,6 +10,11 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/hosts', function () {
+    return view('hosts');
+});
+
+
 // Route to fetch the registration modal
 Route::get('/registration-modal', function () {
     return view('modals.registration_modal');

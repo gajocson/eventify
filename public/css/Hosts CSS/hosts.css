@@ -1,0 +1,318 @@
+/* ============================================
+   HOSTS PAGE — Eventify
+   ============================================ */
+
+body {
+    background-color: #B57EDC;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', 'Noto Sans', sans-serif;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.hosts-page {
+    min-height: calc(100vh - 140px);
+    background: linear-gradient(160deg, #c89ee0 0%, #a45ec7 40%, #7b35a8 100%);
+    padding-bottom: 60px;
+}
+
+/* ===== HERO BANNER ===== */
+.hosts-hero {
+    text-align: center;
+    padding: 52px 20px 32px;
+}
+
+.hosts-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 12px rgba(60, 0, 90, 0.25);
+}
+
+.hosts-subtitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.88);
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+/* ===== SECTION LABELS ===== */
+.hosts-section-label {
+    max-width: 100%;
+    margin: 40px 0 0;
+    padding: 0 32px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 6px;
+}
+
+.section-sub {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+}
+
+
+/* ===== HOSTS GRID ===== */
+.hosts-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 24px 32px 44px;
+    max-width: 100%;
+    margin: 0;
+}
+
+/* ===== HOST CARD ===== */
+.host-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(60, 0, 100, 0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.host-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(60, 0, 100, 0.28);
+}
+
+/* Image area */
+.host-card__img-wrap {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    background: #e8d5f5;
+}
+
+.host-card__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.4s ease;
+}
+
+.host-card:hover .host-card__img-wrap img {
+    transform: scale(1.05);
+}
+
+/* Badge (Top Rated / New) */
+.host-card__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, #7b4bb7, #5a2d82);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.host-card__badge--new {
+    background: linear-gradient(135deg, #e040fb, #9c27b0);
+}
+
+/* Card body */
+.host-card__body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.host-card__name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #2d0a4e;
+    margin: 0;
+}
+
+.host-card__specialty {
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #8a6aaa;
+    margin: 0;
+    letter-spacing: 0.2px;
+}
+
+.host-card__meta {
+    margin-top: 4px;
+}
+
+.host-card__rating {
+    font-size: 13px;
+    color: #f4a800;
+    font-weight: 600;
+}
+
+.host-card__rating small {
+    font-size: 11px;
+    color: #999;
+    font-weight: 400;
+}
+
+/* Rate display */
+.host-card__rate {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid #f0e6fa;
+}
+
+.rate-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #5a2d82;
+}
+
+.rate-label {
+    font-size: 13px;
+    color: #999;
+    font-weight: 300;
+}
+
+/* Book Now button */
+.host-card__btn {
+    margin-top: 14px;
+    width: 100%;
+    padding: 11px 0;
+    background: linear-gradient(135deg, #7b4bb7, #5a2d82);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 14px rgba(90, 45, 130, 0.35);
+}
+
+.host-card__btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* ============================================
+   PORTFOLIO OVERLAY — slides up on card hover
+   ============================================ */
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(170deg, rgba(45, 10, 78, 0.92) 0%, rgba(91, 44, 130, 0.97) 100%);
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px 18px;
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    border-radius: 0;
+}
+
+/* Slide up when card is hovered */
+.host-card:hover .portfolio-overlay {
+    transform: translateY(0);
+}
+
+/* Bio quote */
+.portfolio-bio {
+    font-family: 'Lato', sans-serif;
+    font-size: 12.5px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    padding-left: 10px;
+}
+
+/* Stats row */
+.portfolio-stats {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 8px;
+    gap: 6px;
+}
+
+.p-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.p-stat__num {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.p-stat__lbl {
+    font-family: 'Lato', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Emoji tags row */
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.portfolio-tags span {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 11px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
