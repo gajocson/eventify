@@ -61,15 +61,10 @@
                         <input class="searchField" type="search" placeholder="Search events">
                     </div>
                     <div class="searchDivider"></div>
-                    <div class="searchSegment">
-                        <label class="searchLabel">When</label>
-                        <input class="dateTimeField" type="date" placeholder="Add dates">
-                    </div>
-                    <div class="searchDivider"></div>
                     <div class="searchSegment searchSegment--last">
-                        <label class="searchLabel">Who</label>
+                        <label class="searchLabel">When</label>
                         <div class="search-inner">
-                            <input class="searchField" type="text" placeholder="Add guests">
+                            <input class="dateTimeField" type="date" placeholder="Add dates">
                             <button class="searchBtn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="11" cy="11" r="8"></circle>
@@ -139,13 +134,7 @@
                     <div class="event-description">
                         <h3 class="service-desc-title">About this service</h3>
                         <p>Make your dream wedding a reality with our all-inclusive premium wedding reception package. From breathtaking floral arrangements and exquisite catering to full sound and lighting setup — our dedicated team of event specialists handles every detail so you can focus on celebrating your special day.</p>
-                        <div class="service-highlights">
-                            <div class="highlight-item">🌸 Full floral décor & styling</div>
-                            <div class="highlight-item">🍽️ Catering for up to 300 guests</div>
-                            <div class="highlight-item">🎵 Live band & sound system</div>
-                            <div class="highlight-item">📸 Photo & video coverage</div>
-                        </div>
-                        <a href="#" class="view-event-btn">View Full Package →</a>
+                        <a href="#" class="view-event-btn" data-bs-toggle="modal" data-bs-target="#loginModal">View Full Package →</a>
                     </div>
                     <div class="event-quick-book">
                         <div class="quick-book-card">
@@ -162,7 +151,7 @@
                                     <span>Up to 300</span>
                                 </div>
                             </div>
-                            <button class="book-now-btn">Book Now</button>
+                            <button class="book-now-btn" data-bs-toggle="modal" data-bs-target="#loginModal">Book Now</button>
                             <p class="book-note">You won't be charged yet</p>
                         </div>
                     </div>
@@ -180,7 +169,7 @@
 
                 <div class="events-grid">
                     <!-- Service Card 1: Wedding -->
-                    <div class="event-card">
+                    <div class="event-card" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <div class="event-card-img-wrapper">
                             <img src="{{ asset('images/Homepage Photos/LandingPageImg.jpg') }}" alt="Wedding Service">
                             <span class="event-card-badge">💍 Wedding</span>
@@ -200,7 +189,7 @@
                     </div>
 
                     <!-- Service Card 2: Birthday -->
-                    <div class="event-card">
+                    <div class="event-card" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <div class="event-card-img-wrapper">
                             <img src="{{ asset('images/Homepage Photos/LandingPageImg2.png') }}" alt="Birthday Service">
                             <span class="event-card-badge">🎂 Birthday</span>
@@ -220,7 +209,7 @@
                     </div>
 
                     <!-- Service Card 3: Conference -->
-                    <div class="event-card">
+                    <div class="event-card" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <div class="event-card-img-wrapper">
                             <img src="{{ asset('images/Homepage Photos/LandingPageImg3.png') }}" alt="Conference Service">
                             <span class="event-card-badge">🏢 Conference</span>
@@ -240,7 +229,7 @@
                     </div>
 
                     <!-- Service Card 4: Debut -->
-                    <div class="event-card">
+                    <div class="event-card" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <div class="event-card-img-wrapper">
                             <img src="{{ asset('images/Homepage Photos/LandingPageImg4.png') }}" alt="Debut Service">
                             <span class="event-card-badge">👑 Debut</span>
@@ -260,7 +249,7 @@
                     </div>
 
                     <!-- Service Card 5: Christening -->
-                    <div class="event-card">
+                    <div class="event-card" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <div class="event-card-img-wrapper">
                             <img src="{{ asset('images/Homepage Photos/Hpbck Image.png') }}" alt="Christening Service">
                             <span class="event-card-badge">🕊️ Christening</span>
@@ -280,7 +269,7 @@
                     </div>
 
                     <!-- Service Card 6: Team Building -->
-                    <div class="event-card">
+                    <div class="event-card" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <div class="event-card-img-wrapper">
                             <img src="{{ asset('images/Homepage Photos/LandingPageImg.jpg') }}" alt="Team Building Service">
                             <span class="event-card-badge">🤝 Team Building</span>
