@@ -3,94 +3,197 @@ body {
     margin: 0;
     padding: 0;
 }
- 
+
 * {
     box-sizing: border-box;
 }
- 
-.topdivider{
-    display: flex;
+
+/* ===== HEADER WRAPPER ===== */
+.topdivider {
     width: 100%;
-    align-items: center;
-    padding: 0% 3%;
+    background: #AA60C8;
+    border-bottom: 1px solid #AA60C8;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Container looks like one rounded box */
-.searchBox {
-    margin-left: auto;
+/* ===== TOP ROW: Logo | Nav | Burger ===== */
+.header-top-row {
     display: flex;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.4); /* subtle border */
-    border-radius: 25px;      /* very rounded corners */
-    overflow: hidden;         /* keeps segments inside */
-    background-color: rgba(255, 255, 255, 0.1); /* transparent-ish */
-    box-shadow: 0 2px 20px rgba(0,0,0,0.4);     /* soft shadow */
+    justify-content: space-between;
+    padding: 12px 0 0 0;
+    position: relative;
 }
 
-/* Each segment flex container */
+/* Logo */
+.logoholder a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+/* ===== NAV TABS (absolutely centered) ===== */
+.header-nav {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 20px 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #717171;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    font-family: 'Noto Sans', sans-serif;
+    white-space: nowrap;
+}
+
+.nav-tab-icon {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.nav-tab:hover {
+    color: #222222;
+}
+
+.nav-tab.active {
+    color: #222222;
+    font-weight: 600;
+    border-bottom: 2px solid #6B21A8;
+}
+
+/* ===== RIGHT SIDE: Burger ===== */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+/* ===== SEARCH ROW ===== */
+.header-search-row {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 20px;
+}
+
+/* ===== SEARCH BOX ===== */
+.searchBox {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.2s ease;
+    min-width: 620px;
+}
+
+.searchBox:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* Each search segment */
 .searchSegment {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 24px;
+    flex: 1;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: background 0.15s ease;
 }
 
-/* Inputs inside the segments */
+.searchSegment:hover {
+    background: #f7f7f7;
+}
+
+/* Last segment: label above, then row of input + button */
+.searchSegment--last {
+    flex: 1.2;
+    padding-right: 8px;
+}
+
+/* Row container for input + search button */
+.search-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Label above each input */
+.searchLabel {
+    font-size: 11px;
+    font-weight: 700;
+    color: #222222;
+    letter-spacing: 0.3px;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+/* Inputs */
 .searchField,
 .dateTimeField {
-    border: none;             /* remove individual borders */
-    padding: 12px 20px;       /* more breathing space */
-    font-size: 14px;
-    outline: none;            /* remove focus outline */
-    background: transparent;  /* fully transparent input */
-    height: 45px;             /* taller for nicer look */
-    color: #ffffff;           /* text visible on transparent bg */
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13px;
+    color: #717171;
+    width: 100%;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .searchField::placeholder,
 .dateTimeField::placeholder {
-    color: #ffffff;      /* change to any color you want */
-    opacity: 0.7;        /* optional, makes it slightly faded */
-    font-weight: 500;    /* optional, makes it semi-bold */
+    color: #717171;
 }
 
-/* Optional subtle separator */
-.dateTimeField {
-    border-left: 1px solid rgba(255,255,255,0.3);
+/* Divider between segments */
+.searchDivider {
+    width: 1px;
+    height: 28px;
+    background: #dddddd;
+    flex-shrink: 0;
 }
 
-/* Focus effect */
-.searchBox input:focus {
-    background-color: rgba(255,255,255,0.2); /* highlight lightly */
-}
- 
-.nav-divider1{
-    margin-left: auto;
+/* ===== PURPLE SEARCH BUTTON ===== */
+.searchBtn {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7b4bb7, #5a2d82);
+    border: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(91, 44, 130, 0.4);
 }
 
-.nav-divider2{
-    display: flex;
-    align-items: center;
+.searchBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(91, 44, 130, 0.55);
 }
- 
-.logo {
-    height: 70px;
-    width: 200px;
-}
- 
-.nav-links {
-    list-style: none;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0;
-    display: flex;
-    gap: 40px;   
-    font-size: 20px;
-}
- 
-.nav-links a {
-    display: block;
-    text-decoration: none;
-    color: #333;
-    font-family: 'Noto Sans', sans-serif;
-}
- 

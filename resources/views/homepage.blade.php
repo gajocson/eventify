@@ -14,47 +14,70 @@
 </head>
 <body>
     <div class="wholepage">
-        <div class = "topdivider">
+        <div class="topdivider">
 
-            <div class = "logoholder">
-                <a href="#">
-                <img class = "logo" src = "{{ asset('images/Homepage Photos/Eventify Logo.png') }}" alt = "LogoImage">
-                </a>
-            </div>
-
-            <div class="searchBox">
-                <div class="searchSegment">
-                    <input class="searchField" type="search" placeholder="Search">
+            <!-- Row 1: Logo | Nav Tabs | Burger -->
+            <div class="header-top-row">
+                <div class="logoholder">
+                    <a href="#">
+                        <img class="logo" src="{{ asset('images/Homepage Photos/Eventify Logo.png') }}" alt="LogoImage">
+                    </a>
                 </div>
-                <div class="searchSegment">
-                    <input class="dateTimeField" type="date">
+
+                <nav class="header-nav">
+                    <a href="#" class="nav-tab active">
+                        <span class="nav-tab-icon">🎟️</span>
+                        Events
+                    </a>
+                    <a href="#" class="nav-tab">
+                        <span class="nav-tab-icon">🎤</span>
+                        Hosts
+                    </a>
+                </nav>
+
+                <div class="header-right">
+                    <!-- Burger button -->
+                    <div class="burger" id="burger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown" id="menu">
+                        <div class="menu-header">Welcome</div>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</a>
+                    </div>
                 </div>
             </div>
 
-            <div class = "nav-divider1">
-                <ul class = "nav-links">
-                    <li><a href="#">Events</a></li>
-                </ul>
-            </div>
-
-            <div class = "nav-divider2">
-                <ul class = "nav-links">
-                    <li><a href="#">Hosts</a></li>
-                </ul>
-            </div>
-
-            <!-- Burger button -->
-            <div class="burger" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <!-- Dropdown Menu -->
-            <div class="dropdown" id="menu">
-                <div class="menu-header">Welcome</div>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</a>
+            <!-- Row 2: Search Bar -->
+            <div class="header-search-row">
+                <div class="searchBox">
+                    <div class="searchSegment">
+                        <label class="searchLabel">Where</label>
+                        <input class="searchField" type="search" placeholder="Search events">
+                    </div>
+                    <div class="searchDivider"></div>
+                    <div class="searchSegment">
+                        <label class="searchLabel">When</label>
+                        <input class="dateTimeField" type="date" placeholder="Add dates">
+                    </div>
+                    <div class="searchDivider"></div>
+                    <div class="searchSegment searchSegment--last">
+                        <label class="searchLabel">Who</label>
+                        <div class="search-inner">
+                            <input class="searchField" type="text" placeholder="Add guests">
+                            <button class="searchBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div><!-- end of Top Divider -->
