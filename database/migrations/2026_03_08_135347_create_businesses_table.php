@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('business', function (Blueprint $table) {
+        Schema::create('businesses', function (Blueprint $table) {
             $table->id('business_id'); // PK
             $table->string('business_name');
             $table->string('business_email')->unique();
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('service_id_3')->nullable();
             $table->string('business_cont_num')->nullable();
             $table->string('password');
-            $table->timestamps(); // created_at + updated_at
+            $table->timestamps();
 
             // Foreign key constraints
             $table->foreign('service_id_1')->references('service_id')->on('services')->onDelete('set null');
@@ -30,6 +30,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('business');
+        Schema::dropIfExists('businesses');
     }
 };
