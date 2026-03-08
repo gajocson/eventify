@@ -65,6 +65,8 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 10;
+    /* ensure links sit above nav-right's clickable area */
 }
 
 .nav-link-item {

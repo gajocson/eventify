@@ -9,6 +9,16 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+// Services page
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
+
+// Packages page (placeholder)
+Route::get('/packages', function () {
+    return view('homepage'); // swap with packages view when ready
+})->name('packages');
+
 // Route to fetch the registration modal
 Route::get('/registration-modal', function () {
     return view('modals.registration_modal');
