@@ -112,3 +112,29 @@
         opacity: 0;
     }
 }
+
+/* ======================================================
+   HERO CAROUSEL
+   ====================================================== */
+#heroCarousel {
+    width: 97%;
+    overflow: hidden;
+    border-radius: 25px;
+    margin-left: 25px;
+    margin-top: 25px;
+    margin-right: 25px;
+    margin-bottom: 70px;
+}
+
+.hero-slide-img {
+    height: 48vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 768px) {
+    .hero-slide-img {
+        height: 300px;
+        min-height: 250px;
+    }
+}

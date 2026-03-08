@@ -209,34 +209,51 @@
         </header><!-- end site-header -->
 
         <!-- ======================================================
-             MID SECTION
+             HERO CAROUSEL
              ====================================================== -->
-        <div class="mid-div">
-            <!-- Left Box -->
-            <div class="leftbox">
-                <div class="quote1">
-                    <p>Unlock Unforgettable</p>
-                    <p>Events</p>
-                </div>
-                <div class="quote2">
-                    <p class="quote3">Your journey starts here. Discover seamless</p>
-                    <p class="quote4">planning, unique venues, and curated experiences.</p>
-                </div>
-                <div class="gsbtn">
-                    <button class="getstarted" onclick="">Get started →</button>
-                </div>
-            </div><!-- end of left box -->
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
 
-            <!-- Right Box with Slideshow -->
-            <div class="rightbox">
-                <div class="imagebox">
-                    <img src="{{ asset('images/Homepage Photos/LandingPageImg.jpg') }}" alt="Image">
-                    <img src="{{ asset('images/Homepage Photos/LandingPageImg2.png') }}" alt="Image">
-                    <img src="{{ asset('images/Homepage Photos/LandingPageImg3.png') }}" alt="Image">
-                    <img src="{{ asset('images/Homepage Photos/LandingPageImg4.png') }}" alt="Image">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg.jpg') }}"
+                         class="d-block w-100 hero-slide-img" alt="Eventify Slide 1">
                 </div>
-            </div><!-- end of right box -->
-        </div><!-- end of mid-div -->
+                <div class="carousel-item">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg2.png') }}"
+                         class="d-block w-100 hero-slide-img" alt="Eventify Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg3.png') }}"
+                         class="d-block w-100 hero-slide-img" alt="Eventify Slide 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('images/Homepage Photos/LandingPageImg4.png') }}"
+                         class="d-block w-100 hero-slide-img" alt="Eventify Slide 4">
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div><!-- end hero carousel -->
+
+
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
