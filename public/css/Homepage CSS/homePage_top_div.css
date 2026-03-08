@@ -1,96 +1,345 @@
-body {
-    background-color: #B57EDC;
-    margin: 0;
-    padding: 0;
-}
- 
-* {
+/* ================================================
+   Base Reset & Font
+   ================================================ */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
- 
-.topdivider{
-    display: flex;
-    width: 100%;
-    align-items: center;
-    padding: 0% 3%;
-}
 
-/* Container looks like one rounded box */
-.searchBox {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.4); /* subtle border */
-    border-radius: 25px;      /* very rounded corners */
-    overflow: hidden;         /* keeps segments inside */
-    background-color: rgba(255, 255, 255, 0.1); /* transparent-ish */
-    box-shadow: 0 2px 20px rgba(0,0,0,0.4);     /* soft shadow */
-}
-
-/* Each segment flex container */
-.searchSegment {
-    display: flex;
-}
-
-/* Inputs inside the segments */
-.searchField,
-.dateTimeField {
-    border: none;             /* remove individual borders */
-    padding: 12px 20px;       /* more breathing space */
-    font-size: 14px;
-    outline: none;            /* remove focus outline */
-    background: transparent;  /* fully transparent input */
-    height: 45px;             /* taller for nicer look */
-    color: #ffffff;           /* text visible on transparent bg */
-}
-
-.searchField::placeholder,
-.dateTimeField::placeholder {
-    color: #ffffff;      /* change to any color you want */
-    opacity: 0.7;        /* optional, makes it slightly faded */
-    font-weight: 500;    /* optional, makes it semi-bold */
-}
-
-/* Optional subtle separator */
-.dateTimeField {
-    border-left: 1px solid rgba(255,255,255,0.3);
-}
-
-/* Focus effect */
-.searchBox input:focus {
-    background-color: rgba(255,255,255,0.2); /* highlight lightly */
-}
- 
-.nav-divider1{
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-}
-
-.nav-divider2{
-    display: flex;
-    align-items: center;
-}
- 
-.logo {
-    height: 70px;
-    width: 200px;
-}
- 
-.nav-links {
-    list-style: none;
-    padding-left: 20px;
-    padding-right: 20px;
+body {
     margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
+    background-color: #a86cc1;
+}
+
+/* ================================================
+   Site Header — Two-row Airbnb-style layout
+   ================================================ */
+.site-header {
+    width: 100%;
+    background: linear-gradient(135deg, #6b3d9a 0%, #5a2d82 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 20px rgba(50, 20, 80, 0.35);
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+/* ================================================
+   Row 1 — Nav bar
+   ================================================ */
+.header-nav {
     display: flex;
-    gap: 40px;   
-    font-size: 20px;
+    align-items: center;
+    padding: 0 32px;
+    height: 72px;
+    position: relative;
 }
- 
-.nav-links a {
-    display: block;
+
+/* ── Left: Logo ── */
+.nav-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
-    color: #333;
-    font-family: 'Noto Sans', sans-serif;
 }
- 
+
+.logo {
+    height: 54px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ── Center: Nav links ── */
+.nav-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-link-item {
+    display: inline-block;
+    padding: 8px 18px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    border-radius: 24px;
+    position: relative;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nav-link-item::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.25s ease;
+}
+
+.nav-link-item:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.nav-link-item:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.nav-link-item.active {
+    color: #fff;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Right: Globe + Burger ── */
+.nav-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    position: relative;
+    /* ensures dropdown positions from here */
+}
+
+/* Globe button */
+.globe-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    color: #fff;
+}
+
+.globe-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: scale(1.07);
+}
+
+.globe-btn .material-symbols-outlined {
+    font-size: 20px;
+    color: #fff;
+}
+
+/* ================================================
+   Row 2 — Search Bar
+   ================================================ */
+.header-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 32px 20px;
+}
+
+/* Pill container */
+.search-pill {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 50px;
+    box-shadow:
+        0 4px 24px rgba(50, 20, 80, 0.22),
+        0 1px 6px rgba(0, 0, 0, 0.08);
+    max-width: 680px;
+    width: 100%;
+    height: 58px;
+    padding: 4px 4px 4px 6px;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    transition: box-shadow 0.25s ease;
+}
+
+.search-pill:focus-within {
+    box-shadow:
+        0 6px 32px rgba(50, 20, 80, 0.32),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual search fields */
+.search-field {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 8px;
+    padding: 0 16px;
+    cursor: text;
+    min-width: 0;
+    /* allow shrink */
+}
+
+.search-field-icon {
+    color: #7b4bb7;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.search-field-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.search-field-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #3d2b4f;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.search-field input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13.5px;
+    color: #2d1e42;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    padding: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-field input::placeholder {
+    color: #a89bbf;
+    font-size: 12.5px;
+}
+
+/* Vertical divider between fields */
+.search-divider {
+    width: 1px;
+    height: 30px;
+    background: #e2d9f3;
+    flex-shrink: 0;
+}
+
+/* Search button */
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, #7b4bb7, #5a2d82);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: 4px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(106, 72, 126, 0.45);
+}
+
+.search-btn .material-symbols-outlined {
+    color: #fff;
+    font-size: 22px;
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, #6a3da6, #4a2272);
+    transform: scale(1.06);
+    box-shadow: 0 6px 20px rgba(106, 72, 126, 0.6);
+}
+
+.search-btn:active {
+    transform: scale(0.98);
+}
+
+/* ================================================
+   Responsive
+   ================================================ */
+@media (max-width: 768px) {
+    .header-nav {
+        padding: 0 18px;
+        height: 64px;
+    }
+
+    /* Hide center nav links on mobile */
+    .nav-center {
+        display: none;
+    }
+
+    .logo {
+        height: 44px;
+    }
+
+    .header-search {
+        padding: 10px 14px 16px;
+    }
+
+    .search-pill {
+        height: 52px;
+        max-width: 100%;
+    }
+
+    .search-field {
+        padding: 0 10px;
+    }
+
+    .search-field-label {
+        font-size: 9.5px;
+    }
+
+    .search-field input {
+        font-size: 12.5px;
+    }
+
+    .search-btn {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-nav {
+        padding: 0 12px;
+    }
+
+    .globe-btn {
+        display: none;
+    }
+
+    .search-pill {
+        height: 48px;
+    }
+
+    /* Stack search to single row */
+    .search-field-label {
+        display: none;
+    }
+
+    .search-field input {
+        font-size: 13px;
+    }
+
+    .search-field-icon {
+        font-size: 18px;
+    }
+}
