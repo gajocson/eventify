@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_mid_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Registration CSS/Reg_contain_div.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Homepage CSS/hero_banner.css') }}">
 </head>
 <body>
     <div class="wholepage">
@@ -20,6 +21,19 @@
         {{-- Shared Header (logo, nav, search bar, burger dropdown) --}}
         @include('partials.header')
         @include('partials.toast')
+
+        {{-- =====================================================
+             HERO BANNER — Always visible (before & after login)
+             ===================================================== --}}
+        <div class="hero-banner">
+            <img class="hero-banner__img" src="{{ asset('images/Homepage Photos/hero_banner.png') }}" alt="Where Great Events Begin — Eventify Hero Banner">
+            <div class="hero-banner__overlay"></div>
+            <div class="hero-banner__content">
+                <span class="hero-banner__tagline">Discover · Plan · Celebrate</span>
+                <h1 class="hero-banner__headline">Where Great Events Begin</h1>
+                <a href="#" class="hero-banner__cta">Explore Events</a>
+            </div>
+        </div>
 
         {{-- =====================================================
              MID SECTION
