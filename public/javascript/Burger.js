@@ -1,7 +1,8 @@
 /**
  * Burger.js — Eventify
  * Handles: burger toggle, password visibility, auth form switching,
- *           AJAX Sign In, AJAX Sign Up, AJAX Sign Out, toast notifications.
+ *           AJAX Sign In (with role), AJAX Sign Up, AJAX Sign Out,
+ *           role-aware dropdown panel swap, toast notifications.
  */
 
 // ─── CSRF token helper ────────────────────────────────────────────────────────
@@ -91,7 +92,6 @@ async function handleSignIn(e) {
     btn.textContent = 'Signing in…';
 
     try {
-        const form = document.getElementById('signinForm');
         const data = new FormData();
         data.append('_token', getCsrfToken());
         data.append('email', email.value.trim());
@@ -102,13 +102,21 @@ async function handleSignIn(e) {
 
         if (json.success) {
             showToast(json.message, 'success');
-            swapToAuthPanel(json.user);
-            // Close burger dropdown
+
+            const role = json.role || 'customer';
+
+            // If admin, redirect immediately to the dashboard
+            if (role === 'admin' && json.redirectUrl) {
+                window.location.href = json.redirectUrl;
+                return;
+            }
+
+            // Customer: swap dropdown to auth panel
+            swapToAuthPanel(json.user, role);
             document.getElementById('burger').classList.remove('active');
             document.getElementById('menu').classList.remove('active');
-            form.reset();
+            document.getElementById('signinForm').reset();
         } else {
-            // Show server-side field errors
             if (json.errors) {
                 if (json.errors.email) showError(email, json.errors.email[0]);
                 if (json.errors.password) showError(password, json.errors.password[0]);
@@ -162,16 +170,17 @@ async function handleSignUp(e) {
         const json = await res.json();
 
         if (json.success) {
-            showToast('Account created! Please sign in.', 'success');
+            showToast(json.message || 'Account created! Please sign in.', 'success');
             document.getElementById('signupForm').reset();
             showAuthForm('signin');
         } else if (json.errors) {
-            // json.errors is an array of strings from CustomerController
-            json.errors.forEach(msg => {
-                // Try to map common messages to fields
-                if (msg.toLowerCase().includes('email')) showError(email, msg);
-                else if (msg.toLowerCase().includes('name')) showError(first, msg);
-                else if (msg.toLowerCase().includes('password')) showError(pass, msg);
+            // Structured errors object from updated CustomerController
+            Object.entries(json.errors).forEach(([field, msgs]) => {
+                const msg = Array.isArray(msgs) ? msgs[0] : msgs;
+                if (field === 'email') showError(email, msg);
+                else if (field === 'first_name') showError(first, msg);
+                else if (field === 'last_name') showError(last, msg);
+                else if (field === 'password') showError(pass, msg);
                 else showToast(msg, 'error');
             });
         }
@@ -203,22 +212,63 @@ async function signOut() {
             document.getElementById('menu').classList.remove('active');
         }
     } catch (err) {
-        // Fallback: full-page logout
-        window.location.href = '/auth/logout';
+        // Fallback: full-page reload
+        window.location.href = '/';
     }
 }
 
 // ─── Dropdown panel swap ──────────────────────────────────────────────────────
-function swapToAuthPanel(user) {
+/**
+ * swapToAuthPanel — called after successful AJAX login.
+ * Builds role-appropriate action links in #auth-actions-container.
+ */
+function swapToAuthPanel(user, role) {
     const guestPanel = document.getElementById('dropdown-guest');
     const authPanel = document.getElementById('dropdown-auth');
+    const actionsContainer = document.getElementById('auth-actions-container');
     if (!guestPanel || !authPanel) return;
 
-    // Populate dynamic fields
+    // Populate greeting and email
     const greeting = document.getElementById('auth-greeting');
     const emailEl = document.getElementById('auth-email');
-    if (greeting) greeting.textContent = 'Hello, ' + (user.name ? user.name.split(' ')[0] : 'there') + '!';
+    const iconEl = document.getElementById('auth-icon');
+
+    const firstName = user.name ? user.name.split(' ')[0] : 'there';
+
+    if (role === 'admin') {
+        if (greeting) greeting.textContent = 'Hello, Admin ' + firstName + '!';
+        if (iconEl) iconEl.textContent = 'admin_panel_settings';
+    } else {
+        if (greeting) greeting.textContent = 'Hello, ' + firstName + '!';
+        if (iconEl) iconEl.textContent = 'account_circle';
+    }
+
     if (emailEl) emailEl.textContent = user.email || '';
+
+    // Build action buttons based on role
+    if (actionsContainer) {
+        if (role === 'admin') {
+            actionsContainer.innerHTML = `
+                <a href="/admin/dashboard" class="auth-action-btn profile-btn">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+                <button class="auth-action-btn signout-btn" onclick="signOut()">
+                    <span class="material-symbols-outlined">logout</span>
+                    Sign Out
+                </button>`;
+        } else {
+            actionsContainer.innerHTML = `
+                <a href="/profile" class="auth-action-btn profile-btn">
+                    <span class="material-symbols-outlined">person</span>
+                    My Profile
+                </a>
+                <button class="auth-action-btn signout-btn" onclick="signOut()">
+                    <span class="material-symbols-outlined">logout</span>
+                    Sign Out
+                </button>`;
+        }
+    }
 
     guestPanel.style.display = 'none';
     authPanel.style.display = '';
@@ -255,10 +305,8 @@ function showToast(message, type = 'info') {
         </button>`;
 
     container.appendChild(toast);
-    // Trigger enter animation
     requestAnimationFrame(() => toast.classList.remove('toast-enter'));
 
-    // Auto-dismiss after 4 s
     setTimeout(() => {
         toast.classList.add('toast-leave');
         setTimeout(() => toast.remove(), 400);

@@ -12,7 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Role-based access middleware aliases
+        $middleware->alias([
+            'admin'         => \App\Http\Middleware\AdminMiddleware::class,
+            'customer.only' => \App\Http\Middleware\CustomerMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // Redirect unauthenticated users to homepage instead of /login

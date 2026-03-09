@@ -10,6 +10,7 @@ class AuthController extends Controller
 {
     // ─────────────────────────────────────────────
     // POST /auth/login  →  JSON response
+    // Single form handles both customer and admin
     // ─────────────────────────────────────────────
     public function login(Request $request)
     {
@@ -37,10 +38,24 @@ class AuthController extends Controller
 
             $user = Auth::guard('customer')->user();
 
+            // Determine display name and redirect destination based on role
+            $displayName = $user->first_name;
+            $role        = $user->role;
+
+            if ($role === 'admin') {
+                $greeting    = 'Welcome, Admin ' . $displayName . '!';
+                $redirectUrl = route('admin.dashboard');
+            } else {
+                $greeting    = 'Welcome back, ' . $displayName . '!';
+                $redirectUrl = null; // stay on page for customers
+            }
+
             return response()->json([
-                'success' => true,
-                'message' => 'Welcome back, ' . $user->first_name . '!',
-                'user'    => [
+                'success'     => true,
+                'message'     => $greeting,
+                'role'        => $role,
+                'redirectUrl' => $redirectUrl,
+                'user'        => [
                     'name'  => $user->first_name . ' ' . $user->last_name,
                     'email' => $user->email,
                 ],
@@ -72,7 +87,7 @@ class AuthController extends Controller
     }
 
     // ─────────────────────────────────────────────
-    // GET /profile  (protected by auth:customer)
+    // GET /profile  (protected by auth:customer + customer.only)
     // ─────────────────────────────────────────────
     public function profile()
     {
@@ -81,8 +96,8 @@ class AuthController extends Controller
     }
 
     // ─────────────────────────────────────────────
-    // GET /auth/user  →  returns current user JSON
-    // Used by JS on page load to set dropdown state
+    // GET /auth/user  →  returns current user JSON + role
+    // Used by JS on page load to restore dropdown state
     // ─────────────────────────────────────────────
     public function authUser()
     {
@@ -90,7 +105,8 @@ class AuthController extends Controller
             $user = Auth::guard('customer')->user();
             return response()->json([
                 'authenticated' => true,
-                'user' => [
+                'role'          => $user->role,
+                'user'          => [
                     'name'  => $user->first_name . ' ' . $user->last_name,
                     'email' => $user->email,
                 ],

@@ -1,6 +1,6 @@
 {{-- ============================================================
      Auth Forms Sub-Partial
-     Included inside the dropdown for both guest and hidden auth panels.
+     Included inside the dropdown for guests.
      ============================================================ --}}
 
 <div class="menu-header">Welcome to Eventify</div>
@@ -44,20 +44,10 @@
     </form>
 </div>
 
-{{-- Sign Up Form --}}
+{{-- Sign Up Form (Customer registration only — role assigned server-side) --}}
 <div class="auth-form-wrapper" id="form-signup">
     <form id="signupForm" onsubmit="handleSignUp(event)">
         @csrf
-        <div class="user-type-selection">
-            <div class="radio-item">
-                <input type="radio" id="dp-customer" name="user_type" value="customer" checked>
-                <label for="dp-customer">Customer</label>
-            </div>
-            <div class="radio-item">
-                <input type="radio" id="dp-organizer" name="user_type" value="organizer">
-                <label for="dp-organizer">Organizer</label>
-            </div>
-        </div>
         <div class="name-row">
             <div class="field-group">
                 <input type="text" name="first_name" id="signup-firstname" placeholder="First Name" required autocomplete="given-name">
@@ -70,11 +60,11 @@
             <input type="email" name="email" id="signup-email" placeholder="Email address" required autocomplete="email">
         </div>
         <div class="field-group pass-wrap">
-            <input type="password" name="password" id="signup-password" placeholder="Password" required>
+            <input type="password" name="password" id="signup-password" placeholder="Password" required autocomplete="new-password">
             <span class="material-symbols-outlined eye" data-target="signup-password">visibility_off</span>
         </div>
         <div class="field-group pass-wrap">
-            <input type="password" name="password_confirmation" id="signup-confirm" placeholder="Confirm Password" required>
+            <input type="password" name="password_confirmation" id="signup-confirm" placeholder="Confirm Password" required autocomplete="new-password">
             <span class="material-symbols-outlined eye" data-target="signup-confirm">visibility_off</span>
         </div>
         <div class="checkbox-wrap">

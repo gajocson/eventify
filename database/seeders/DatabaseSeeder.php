@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // Seed 5 businesses with fake data
         Business::factory(5)->create();
 
-        // Optional: you can add more logic here if needed
-        // For example, link businesses to customers if you later add relations
+        // Create default admin account
+        $this->call(AdminSeeder::class);
     }
 }
