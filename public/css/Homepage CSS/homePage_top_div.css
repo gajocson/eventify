@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', 'Noto Sans', sans-serif;
-    background-color: #a86cc1;
+    background-color: #e3d9e7;
 }
 
 /* ================================================
@@ -19,7 +19,7 @@ body {
    ================================================ */
 .site-header {
     width: 100%;
-    background: linear-gradient(135deg, #6b3d9a 0%, #5a2d82 100%);
+    background: linear-gradient(135deg, #6b3d9a 0%, #a079c3 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 2px 20px rgba(50, 20, 80, 0.35);
     position: sticky;
