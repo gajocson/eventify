@@ -306,16 +306,45 @@
             openModal(svcBackdrop);
         });
 
-        /* -- Booking → Confirm (placeholder — wire to backend later) -- */
+        /* -- Booking → Confirm: POST to /booking page -- */
         document.getElementById('bookingConfirmBtn').addEventListener('click', () => {
-            // TODO: POST to booking endpoint
-            closeAll();
-            // Show success toast if available
-            if (typeof window.showToast === 'function') {
-                window.showToast('success', 'Booking request sent! We\'ll be in touch soon.', 5000);
-            } else {
-                alert('Booking submitted! Our team will contact you shortly.');
-            }
+            // Collect the currently selected services from the service modal
+            const selectedServices = Array.from(
+                svcModal.querySelectorAll('input[type="checkbox"]:checked')
+            ).map(cb => cb.dataset.label);
+
+            // Build a hidden form and submit it to navigate to the booking page
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/booking';
+            form.style.display = 'none';
+
+            // CSRF token
+            const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+            const csrf = document.createElement('input');
+            csrf.type = 'hidden';
+            csrf.name = '_token';
+            csrf.value = csrfMeta ? csrfMeta.content : '';
+            form.appendChild(csrf);
+
+            // Package name
+            const pkgInput = document.createElement('input');
+            pkgInput.type = 'hidden';
+            pkgInput.name = 'package';
+            pkgInput.value = currentPackage;
+            form.appendChild(pkgInput);
+
+            // Each selected service as services[]
+            selectedServices.forEach(svc => {
+                const svcInput = document.createElement('input');
+                svcInput.type = 'hidden';
+                svcInput.name = 'services[]';
+                svcInput.value = svc;
+                form.appendChild(svcInput);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
         });
 
         /* -- Close buttons (✕) -- */

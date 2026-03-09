@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
 
 // ─── Public pages ─────────────────────────────────────────────────────────────
 Route::get('/', function () {
@@ -30,6 +31,7 @@ Route::get('/auth/user',    [AuthController::class, 'authUser'])->name('auth.use
 // ─── Customer-only routes ──────────────────────────────────────────────────────
 Route::middleware(['auth:customer', 'customer.only'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::post('/booking', [BookingController::class, 'show'])->name('booking.show');
 });
 
 // ─── Admin-only routes ─────────────────────────────────────────────────────────
