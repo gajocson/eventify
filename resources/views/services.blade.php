@@ -17,6 +17,7 @@
 
     {{-- Shared Header (logo, nav, search bar, burger dropdown) --}}
     @include('partials.header')
+    @include('partials.toast')
 
     {{-- =====================================================
          SERVICES CONTENT
@@ -238,6 +239,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('javascript/Burger.js') }}"></script>
     <script src="{{ asset('javascript/services.js') }}"></script>
+    <script src="{{ asset('javascript/toast.js') }}"></script>
 
 </body>
 </html>

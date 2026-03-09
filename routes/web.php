@@ -3,39 +3,35 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\AuthController;
 
-
+// ─── Public pages ────────────────────────────────────────────────────────────
 Route::get('/', function () {
     return view('homepage');
 });
 
-// Services page
 Route::get('/services', function () {
     return view('services');
 })->name('services');
 
-// Packages page (placeholder)
 Route::get('/packages', function () {
     return view('homepage'); // swap with packages view when ready
 })->name('packages');
 
-// Route to fetch the registration modal
+// ─── Registration ─────────────────────────────────────────────────────────────
 Route::get('/registration-modal', function () {
     return view('modals.registration_modal');
 });
 
-// Customer registration
 Route::post('/register/customer', [CustomerController::class, 'register'])->name('register.customer');
-
-// Business registration
 Route::post('/register/business', [BusinessController::class, 'register'])->name('register.business');
 
-// Login
-Route::post('/login', function (\Illuminate\Http\Request $request) {
-    $credentials = $request->only('email', 'password');
-    if (\Illuminate\Support\Facades\Auth::attempt($credentials, $request->boolean('remember'))) {
-        $request->session()->regenerate();
-        return redirect()->intended('/');
-    }
-    return back()->withErrors(['email' => 'Invalid email or password.'])->withInput();
-})->name('login');
+// ─── Authentication ───────────────────────────────────────────────────────────
+Route::post('/auth/login',  [AuthController::class, 'login'])->name('login');
+Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/auth/user',    [AuthController::class, 'authUser'])->name('auth.user');
+
+// ─── Protected routes (require customer login) ────────────────────────────────
+Route::middleware('auth:customer')->group(function () {
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+});

@@ -1,0 +1,105 @@
+/* ================================================
+   profile.css — Eventify Profile Page
+   ================================================ */
+
+.profile-page {
+    min-height: calc(100vh - 160px);
+    background: #f3eefb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(90, 45, 130, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    border: 1.5px solid rgba(123, 75, 183, 0.08);
+}
+
+.profile-avatar .material-symbols-outlined {
+    font-size: 88px;
+    color: #7b4bb7;
+    line-height: 1;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.profile-name {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2d1e42;
+    margin: 0 0 6px;
+}
+
+.profile-email {
+    font-size: 15px;
+    color: #7a6091;
+    margin: 0 0 20px;
+}
+
+.profile-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #5a4e70;
+    margin: 6px 0;
+}
+
+.profile-meta .material-symbols-outlined {
+    font-size: 18px;
+    color: #7b4bb7;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.profile-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.22s ease;
+}
+
+.profile-action-btn .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.back-btn {
+    background: rgba(123, 75, 183, 0.1);
+    color: #5a2d82;
+}
+
+.back-btn:hover {
+    background: rgba(123, 75, 183, 0.2);
+    color: #3d1e6b;
+}
+
+.profile-action-btn.signout-btn {
+    background: #5a2d82;
+    color: #fff;
+}
+
+.profile-action-btn.signout-btn:hover {
+    background: #3d1e6b;
+}

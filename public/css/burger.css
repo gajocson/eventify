@@ -435,3 +435,222 @@
     padding-left: 2px;
     font-weight: 500;
 }
+
+/* ================================================
+   Auth-State Dropdown
+   ================================================ */
+#dropdown-auth .menu-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d1e42;
+    padding: 18px 20px 10px;
+    border-bottom: 1px solid rgba(123, 75, 183, 0.08);
+}
+
+#dropdown-auth .auth-icon {
+    font-size: 26px;
+    color: #7b4bb7;
+}
+
+.auth-user-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #7a6091;
+    padding: 8px 20px 14px;
+}
+
+.user-email-icon {
+    font-size: 16px;
+    color: #a890c8;
+}
+
+.auth-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px 16px 18px;
+}
+
+.auth-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    width: 100%;
+    transition: background 0.2s, transform 0.15s;
+    color: #2d1e42;
+    background: rgba(123, 75, 183, 0.06);
+}
+
+.auth-action-btn .material-symbols-outlined {
+    font-size: 20px;
+    color: #7b4bb7;
+}
+
+.auth-action-btn:hover {
+    background: rgba(123, 75, 183, 0.14);
+    transform: translateX(2px);
+}
+
+.auth-action-btn.signout-btn {
+    background: rgba(224, 90, 107, 0.07);
+    color: #c0334a;
+}
+
+.auth-action-btn.signout-btn .material-symbols-outlined {
+    color: #c0334a;
+}
+
+.auth-action-btn.signout-btn:hover {
+    background: rgba(224, 90, 107, 0.16);
+}
+
+/* Panel swap animation */
+@keyframes panelEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.panel-enter {
+    animation: panelEnter 0.35s ease forwards;
+}
+
+/* ================================================
+   Toast Notifications
+   ================================================ */
+#toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.page-toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    min-width: 280px;
+    max-width: 380px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    position: relative;
+}
+
+/* Fixed page-level toast (bottom right — handled by container) */
+#page-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    min-width: 280px;
+    max-width: 380px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#page-toast.toast-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-toast.toast-enter {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.page-toast.toast-leave {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.toast-success {
+    background: #edfaf0;
+    border: 1px solid #7BCF8E;
+    color: #1e6b35;
+}
+
+.toast-error {
+    background: #fff0f2;
+    border: 1px solid #f09aa3;
+    color: #8b1a2a;
+}
+
+.toast-info {
+    background: #f0f3ff;
+    border: 1px solid #a0aef0;
+    color: #1a2b8b;
+}
+
+.toast-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.toast-success .toast-icon {
+    color: #2e7d3e;
+}
+
+.toast-error .toast-icon {
+    color: #c0334a;
+}
+
+.toast-info .toast-icon {
+    color: #3a4ec0;
+}
+
+.toast-message {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+.toast-close .material-symbols-outlined {
+    font-size: 18px;
+}
