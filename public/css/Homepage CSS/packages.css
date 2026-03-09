@@ -1,0 +1,651 @@
+/* ================================================
+   Eventify — Packages Section
+   ================================================ */
+
+/* ------------------------------------------------
+   Section Wrapper
+   ------------------------------------------------ */
+.packages-section {
+    width: 95%;
+    margin: 0 auto 56px;
+    font-family: 'Inter', sans-serif;
+}
+
+.packages-section__header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.packages-section__label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #8b4cc8;
+    margin-bottom: 10px;
+}
+
+.packages-section__title {
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 800;
+    color: #1a0a2e;
+    margin: 0 0 10px;
+    line-height: 1.15;
+}
+
+.packages-section__subtitle {
+    font-size: 15px;
+    color: #6e5d84;
+    margin: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ------------------------------------------------
+   Package Cards Grid
+   ------------------------------------------------ */
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 22px;
+}
+
+/* ------------------------------------------------
+   Individual Package Card
+   ------------------------------------------------ */
+.pkg-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 28px 22px 24px;
+    cursor: pointer;
+    position: relative;
+    border: 1.5px solid #ede8f5;
+    box-shadow:
+        0 4px 16px rgba(107, 61, 154, 0.07),
+        0 1px 4px rgba(0, 0, 0, 0.04);
+    transition:
+        transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.28s ease,
+        border-color 0.22s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Gradient top accent bar */
+.pkg-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8b4cc8, #c07ef0);
+    border-radius: 20px 20px 0 0;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.pkg-card:hover::before {
+    opacity: 1;
+}
+
+.pkg-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 18px 42px rgba(107, 61, 154, 0.16),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    border-color: #c4a9e0;
+}
+
+.pkg-card:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+/* Icon bubble */
+.pkg-card__icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f3eafd, #e8d5f9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.pkg-card:hover .pkg-card__icon {
+    background: linear-gradient(135deg, #e8d5f9, #d4b4f2);
+    transform: scale(1.08) rotate(-4deg);
+}
+
+.pkg-card__body {
+    flex: 1;
+}
+
+.pkg-card__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a0a2e;
+    margin: 0 0 6px;
+    line-height: 1.3;
+}
+
+.pkg-card__desc {
+    font-size: 13px;
+    color: #7a6091;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.pkg-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #8b4cc8;
+    margin-top: 2px;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.pkg-card:hover .pkg-card__cta {
+    gap: 8px;
+    color: #6a3da6;
+}
+
+/* ================================================
+   Modal Base Styles (shared by all 3 modals)
+   ================================================ */
+.evtf-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 5, 26, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+}
+
+.evtf-modal-backdrop.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.evtf-modal {
+    background: #ffffff;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow:
+        0 32px 80px rgba(12, 5, 26, 0.28),
+        0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 32px 28px 28px;
+    position: relative;
+    transform: translateY(22px) scale(0.97);
+    transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.evtf-modal-backdrop.is-open .evtf-modal {
+    transform: translateY(0) scale(1);
+}
+
+/* Scrollbar */
+.evtf-modal::-webkit-scrollbar {
+    width: 4px;
+}
+
+.evtf-modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.evtf-modal::-webkit-scrollbar-thumb {
+    background: rgba(139, 76, 200, 0.2);
+    border-radius: 10px;
+}
+
+/* Close button */
+.evtf-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    background: rgba(139, 76, 200, 0.08);
+    border: none;
+    border-radius: 10px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #7a5e9a;
+    transition: background 0.2s, color 0.2s;
+    line-height: 1;
+}
+
+.evtf-modal__close:hover {
+    background: rgba(139, 76, 200, 0.16);
+    color: #4a2272;
+}
+
+/* ------------------------------------------------
+   Service Selection Modal
+   ------------------------------------------------ */
+.svc-modal__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #f3eafd, #ede3fa);
+    border: 1px solid #d4b4f2;
+    border-radius: 50px;
+    padding: 5px 13px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6a3da6;
+    margin-bottom: 14px;
+}
+
+.svc-modal__title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a0a2e;
+    margin: 0 0 4px;
+    line-height: 1.2;
+}
+
+.svc-modal__subtitle {
+    font-size: 13.5px;
+    color: #7a6091;
+    margin: 0 0 22px;
+    line-height: 1.5;
+}
+
+.svc-modal__pkg-name {
+    color: #8b4cc8;
+    font-style: italic;
+}
+
+/* Service checkboxes */
+.svc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.svc-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 16px;
+    background: #faf7ff;
+    border: 1.5px solid #ede8f5;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    user-select: none;
+}
+
+.svc-item:hover {
+    background: #f3eafd;
+    border-color: #c4a9e0;
+}
+
+.svc-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #8b4cc8;
+    cursor: pointer;
+    flex-shrink: 0;
+    border-radius: 5px;
+}
+
+.svc-item.is-checked {
+    background: linear-gradient(135deg, #f3eafd, #ede3fa);
+    border-color: #b890e8;
+}
+
+.svc-item__icon {
+    font-size: 20px;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.svc-item__label {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #1a0a2e;
+    flex: 1;
+}
+
+.svc-item__sublabel {
+    font-size: 12px;
+    color: #7a6091;
+    margin-top: 1px;
+}
+
+/* Selection counter */
+.svc-counter {
+    font-size: 12.5px;
+    color: #7a6091;
+    text-align: center;
+    margin-bottom: 16px;
+    transition: color 0.2s;
+}
+
+.svc-counter.is-ready {
+    color: #2e7d3e;
+    font-weight: 600;
+}
+
+/* Book now button */
+.svc-booknow-btn {
+    width: 100%;
+    padding: 14px 0;
+    background: linear-gradient(135deg, #8b4cc8, #5a2d82);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    box-shadow: 0 6px 20px rgba(107, 61, 154, 0.35);
+    transition: all 0.25s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.svc-booknow-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #9d5de0, #6b3da6);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(107, 61, 154, 0.48);
+}
+
+.svc-booknow-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.svc-booknow-btn:disabled {
+    background: #d5c8e8;
+    color: #a896bc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ------------------------------------------------
+   Guest Auth Prompt Modal
+   ------------------------------------------------ */
+.auth-prompt-modal__icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #f3eafd, #e8d5f9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 0 auto 18px;
+}
+
+.auth-prompt-modal__title {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 800;
+    color: #1a0a2e;
+    margin: 0 0 8px;
+}
+
+.auth-prompt-modal__text {
+    text-align: center;
+    font-size: 14px;
+    color: #7a6091;
+    line-height: 1.6;
+    margin: 0 0 26px;
+}
+
+.auth-prompt-modal__text strong {
+    color: #8b4cc8;
+}
+
+.auth-prompt-btns {
+    display: flex;
+    gap: 12px;
+}
+
+.auth-prompt-btns a,
+.auth-prompt-btns button {
+    flex: 1;
+    padding: 13px 0;
+    border-radius: 14px;
+    font-size: 14.5px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.22s ease;
+}
+
+.auth-prompt__signin {
+    background: linear-gradient(135deg, #8b4cc8, #5a2d82);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(107, 61, 154, 0.38);
+}
+
+.auth-prompt__signin:hover {
+    background: linear-gradient(135deg, #9d5de0, #6b3da6);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(107, 61, 154, 0.50);
+    color: #fff;
+    text-decoration: none;
+}
+
+.auth-prompt__signup {
+    background: #f3eafd;
+    color: #6a3da6;
+    border: 1.5px solid #d4b4f2;
+}
+
+.auth-prompt__signup:hover {
+    background: #ede3fa;
+    border-color: #b890e8;
+    transform: translateY(-2px);
+    color: #4a2272;
+    text-decoration: none;
+}
+
+/* ------------------------------------------------
+   Booking Confirmation Modal
+   ------------------------------------------------ */
+.booking-modal__check {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #edfaf0, #d6f5de);
+    border: 2px solid #7bcf8e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 18px;
+}
+
+.booking-modal__title {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 800;
+    color: #1a0a2e;
+    margin: 0 0 6px;
+}
+
+.booking-modal__subtitle {
+    text-align: center;
+    font-size: 13.5px;
+    color: #7a6091;
+    margin: 0 0 22px;
+    line-height: 1.5;
+}
+
+.booking-modal__summary {
+    background: #faf7ff;
+    border: 1.5px solid #ede8f5;
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+}
+
+.booking-summary__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.booking-summary__row:last-child {
+    margin-bottom: 0;
+}
+
+.booking-summary__icon {
+    font-size: 18px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    color: #8b4cc8;
+}
+
+.booking-summary__key {
+    font-size: 12px;
+    font-weight: 600;
+    color: #a08ab8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.booking-summary__val {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a0a2e;
+    margin-top: 2px;
+    line-height: 1.4;
+}
+
+/* Services tag list */
+.booking-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.booking-tag {
+    background: linear-gradient(135deg, #f3eafd, #ede3fa);
+    border: 1px solid #d4b4f2;
+    border-radius: 50px;
+    padding: 4px 11px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6a3da6;
+}
+
+.booking-confirm-btn {
+    width: 100%;
+    padding: 14px 0;
+    background: linear-gradient(135deg, #8b4cc8, #5a2d82);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    box-shadow: 0 6px 20px rgba(107, 61, 154, 0.35);
+    transition: all 0.25s ease;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 10px;
+}
+
+.booking-confirm-btn:hover {
+    background: linear-gradient(135deg, #9d5de0, #6b3da6);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(107, 61, 154, 0.48);
+}
+
+.booking-confirm-btn:active {
+    transform: translateY(0);
+}
+
+.booking-back-btn {
+    width: 100%;
+    padding: 12px 0;
+    background: transparent;
+    color: #8b4cc8;
+    border: 1.5px solid #d4b4f2;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.22s ease;
+}
+
+.booking-back-btn:hover {
+    background: #f3eafd;
+    border-color: #b890e8;
+}
+
+/* ================================================
+   Responsive
+   ================================================ */
+@media (max-width: 768px) {
+    .packages-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .evtf-modal {
+        padding: 24px 18px 20px;
+        border-radius: 20px;
+    }
+
+    .packages-section__title {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .packages-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .pkg-card {
+        padding: 20px 16px 18px;
+    }
+
+    .auth-prompt-btns {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 360px) {
+    .packages-grid {
+        grid-template-columns: 1fr;
+    }
+}

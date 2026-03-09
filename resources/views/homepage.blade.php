@@ -7,13 +7,17 @@
     <title>Eventify — Plan Your Perfect Event</title>
     <meta name="description" content="Eventify: discover seamless event planning, unique venues, and curated experiences.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_mid_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Registration CSS/Reg_contain_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/hero_banner.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Homepage CSS/packages.css') }}">
+
+    {{-- Pass auth state to JavaScript --}}
+    <script>window.EVENTIFY_IS_AUTH = {{ auth()->check() ? 'true' : 'false' }};</script>
 </head>
 <body>
     <div class="wholepage">
@@ -31,28 +35,128 @@
             <div class="hero-banner__content">
                 <span class="hero-banner__tagline">Discover · Plan · Celebrate</span>
                 <h1 class="hero-banner__headline">Where Great Events Begin</h1>
-                <a href="#" class="hero-banner__cta">Explore Events</a>
+                <a href="#packages" class="hero-banner__cta">Browse Packages</a>
             </div>
         </div>
 
         {{-- =====================================================
+             PACKAGES SECTION — Visible to all users
+             ===================================================== --}}
+        <section class="packages-section" id="packages">
+            <div class="packages-section__header">
+                <span class="packages-section__label">✦ Our Packages</span>
+                <h2 class="packages-section__title">Find Your Perfect Event</h2>
+                <p class="packages-section__subtitle">Choose a package below, select your services, and let us bring your vision to life.</p>
+            </div>
+
+            <div class="packages-grid">
+
+                {{-- 1. Wedding --}}
+                <div class="pkg-card" data-package="Wedding Package" role="button" tabindex="0" aria-label="Open Wedding Package">
+                    <div class="pkg-card__icon">💍</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Wedding Package</p>
+                        <p class="pkg-card__desc">Timeless ceremonies and elegant receptions tailored to your love story.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 2. Birthday Party --}}
+                <div class="pkg-card" data-package="Birthday Party Package" role="button" tabindex="0" aria-label="Open Birthday Party Package">
+                    <div class="pkg-card__icon">🎂</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Birthday Party Package</p>
+                        <p class="pkg-card__desc">Fun, vibrant celebrations that make every age feel special.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 3. Debut --}}
+                <div class="pkg-card" data-package="Debut Package" role="button" tabindex="0" aria-label="Open Debut Package">
+                    <div class="pkg-card__icon">👑</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Debut Package</p>
+                        <p class="pkg-card__desc">Mark the milestone of turning 18 with a night to remember.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 4. Corporate Event --}}
+                <div class="pkg-card" data-package="Corporate Event Package" role="button" tabindex="0" aria-label="Open Corporate Event Package">
+                    <div class="pkg-card__icon">🏢</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Corporate Event Package</p>
+                        <p class="pkg-card__desc">Professional gatherings, conferences, and team events done right.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 5. Engagement Party --}}
+                <div class="pkg-card" data-package="Engagement Party Package" role="button" tabindex="0" aria-label="Open Engagement Party Package">
+                    <div class="pkg-card__icon">💒</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Engagement Party Package</p>
+                        <p class="pkg-card__desc">Celebrate your "yes" with an intimate and stylish gathering.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 6. Baby Shower --}}
+                <div class="pkg-card" data-package="Baby Shower Package" role="button" tabindex="0" aria-label="Open Baby Shower Package">
+                    <div class="pkg-card__icon">🍼</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Baby Shower Package</p>
+                        <p class="pkg-card__desc">Sweet and playful showers welcoming your little one into the world.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 7. Graduation Party --}}
+                <div class="pkg-card" data-package="Graduation Party Package" role="button" tabindex="0" aria-label="Open Graduation Party Package">
+                    <div class="pkg-card__icon">🎓</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Graduation Party Package</p>
+                        <p class="pkg-card__desc">Honor every milestone, diploma, and dream achieved.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 8. Anniversary Celebration --}}
+                <div class="pkg-card" data-package="Anniversary Celebration Package" role="button" tabindex="0" aria-label="Open Anniversary Celebration Package">
+                    <div class="pkg-card__icon">🥂</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Anniversary Celebration Package</p>
+                        <p class="pkg-card__desc">Relive and renew your love story with a memorable celebration.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 9. Product Launch Event --}}
+                <div class="pkg-card" data-package="Product Launch Event Package" role="button" tabindex="0" aria-label="Open Product Launch Event Package">
+                    <div class="pkg-card__icon">🚀</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Product Launch Event Package</p>
+                        <p class="pkg-card__desc">Make a powerful first impression with a buzz-worthy launch event.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+                {{-- 10. Christening / Baptism --}}
+                <div class="pkg-card" data-package="Christening / Baptism Package" role="button" tabindex="0" aria-label="Open Christening / Baptism Package">
+                    <div class="pkg-card__icon">✝️</div>
+                    <div class="pkg-card__body">
+                        <p class="pkg-card__title">Christening / Baptism Package</p>
+                        <p class="pkg-card__desc">A sacred and joyful celebration of faith and new beginnings.</p>
+                    </div>
+                    <span class="pkg-card__cta">Select services →</span>
+                </div>
+
+            </div>{{-- end .packages-grid --}}
+        </section>
+
+        {{-- =====================================================
              MID SECTION
              ===================================================== --}}
-        <div class="mid-div">
-            <!-- Left Box -->
-            <div class="leftbox">
-                <div class="quote1">
-                    <p>Unlock Unforgettable</p>
-                    <p>Events</p>
-                </div>
-                <div class="quote2">
-                    <p class="quote3">Your journey starts here. Discover seamless</p>
-                    <p class="quote4">planning, unique venues, and curated experiences.</p>
-                </div>
-                <div class="gsbtn">
-                    <button class="getstarted" onclick="">Get started →</button>
-                </div>
-            </div><!-- end of left box -->
 
             <!-- Right Box with Slideshow -->
             <div class="rightbox">
@@ -69,5 +173,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('javascript/Burger.js') }}"></script>
     <script src="{{ asset('javascript/toast.js') }}"></script>
+    <script src="{{ asset('javascript/packages.js') }}"></script>
 </body>
 </html>
