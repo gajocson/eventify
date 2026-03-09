@@ -35,11 +35,8 @@
    bottom 2 centered via column placement
    ================================================ */
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    /* 6 equal cols for centering trick */
+    display: flex;
     gap: 28px;
-    max-width: 1100px;
     margin: 0 auto;
 }
 
