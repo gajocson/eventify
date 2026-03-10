@@ -53,102 +53,152 @@
 
                 {{-- 1. Wedding --}}
                 <div class="pkg-card" data-package="Wedding Package" role="button" tabindex="0" aria-label="Open Wedding Package">
-                    <div class="pkg-card__icon">💍</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Wedding Package</p>
-                        <p class="pkg-card__desc">Timeless ceremonies and elegant receptions tailored to your love story.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_wedding.png') }}" alt="Wedding Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">💍</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Wedding Package</p>
+                            <p class="pkg-card__desc">Timeless ceremonies and elegant receptions tailored to your love story.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 2. Birthday Party --}}
                 <div class="pkg-card" data-package="Birthday Party Package" role="button" tabindex="0" aria-label="Open Birthday Party Package">
-                    <div class="pkg-card__icon">🎂</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Birthday Party Package</p>
-                        <p class="pkg-card__desc">Fun, vibrant celebrations that make every age feel special.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_birthday.png') }}" alt="Birthday Party Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">🎂</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Birthday Party Package</p>
+                            <p class="pkg-card__desc">Fun, vibrant celebrations that make every age feel special.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 3. Debut --}}
                 <div class="pkg-card" data-package="Debut Package" role="button" tabindex="0" aria-label="Open Debut Package">
-                    <div class="pkg-card__icon">👑</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Debut Package</p>
-                        <p class="pkg-card__desc">Mark the milestone of turning 18 with a night to remember.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_debut.png') }}" alt="Debut Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">👑</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Debut Package</p>
+                            <p class="pkg-card__desc">Mark the milestone of turning 18 with a night to remember.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 4. Corporate Event --}}
                 <div class="pkg-card" data-package="Corporate Event Package" role="button" tabindex="0" aria-label="Open Corporate Event Package">
-                    <div class="pkg-card__icon">🏢</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Corporate Event Package</p>
-                        <p class="pkg-card__desc">Professional gatherings, conferences, and team events done right.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_corporate.png') }}" alt="Corporate Event Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">🏢</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Corporate Event Package</p>
+                            <p class="pkg-card__desc">Professional gatherings, conferences, and team events done right.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 5. Engagement Party --}}
                 <div class="pkg-card" data-package="Engagement Party Package" role="button" tabindex="0" aria-label="Open Engagement Party Package">
-                    <div class="pkg-card__icon">💒</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Engagement Party Package</p>
-                        <p class="pkg-card__desc">Celebrate your "yes" with an intimate and stylish gathering.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_engagement.png') }}" alt="Engagement Party Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">💒</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Engagement Party Package</p>
+                            <p class="pkg-card__desc">Celebrate your "yes" with an intimate and stylish gathering.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 6. Baby Shower --}}
                 <div class="pkg-card" data-package="Baby Shower Package" role="button" tabindex="0" aria-label="Open Baby Shower Package">
-                    <div class="pkg-card__icon">🍼</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Baby Shower Package</p>
-                        <p class="pkg-card__desc">Sweet and playful showers welcoming your little one into the world.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_babyshower.png') }}" alt="Baby Shower Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">🍼</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Baby Shower Package</p>
+                            <p class="pkg-card__desc">Sweet and playful showers welcoming your little one into the world.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 7. Graduation Party --}}
                 <div class="pkg-card" data-package="Graduation Party Package" role="button" tabindex="0" aria-label="Open Graduation Party Package">
-                    <div class="pkg-card__icon">🎓</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Graduation Party Package</p>
-                        <p class="pkg-card__desc">Honor every milestone, diploma, and dream achieved.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_graduation.png') }}" alt="Graduation Party Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">🎓</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Graduation Party Package</p>
+                            <p class="pkg-card__desc">Honor every milestone, diploma, and dream achieved.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 8. Anniversary Celebration --}}
                 <div class="pkg-card" data-package="Anniversary Celebration Package" role="button" tabindex="0" aria-label="Open Anniversary Celebration Package">
-                    <div class="pkg-card__icon">🥂</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Anniversary Celebration Package</p>
-                        <p class="pkg-card__desc">Relive and renew your love story with a memorable celebration.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_anniversary.png') }}" alt="Anniversary Celebration Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">🥂</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Anniversary Celebration Package</p>
+                            <p class="pkg-card__desc">Relive and renew your love story with a memorable celebration.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 9. Product Launch Event --}}
                 <div class="pkg-card" data-package="Product Launch Event Package" role="button" tabindex="0" aria-label="Open Product Launch Event Package">
-                    <div class="pkg-card__icon">🚀</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Product Launch Event Package</p>
-                        <p class="pkg-card__desc">Make a powerful first impression with a buzz-worthy launch event.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_productlaunch.png') }}" alt="Product Launch Event Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">🚀</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Product Launch Event Package</p>
+                            <p class="pkg-card__desc">Make a powerful first impression with a buzz-worthy launch event.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
                 {{-- 10. Christening / Baptism --}}
                 <div class="pkg-card" data-package="Christening / Baptism Package" role="button" tabindex="0" aria-label="Open Christening / Baptism Package">
-                    <div class="pkg-card__icon">✝️</div>
-                    <div class="pkg-card__body">
-                        <p class="pkg-card__title">Christening / Baptism Package</p>
-                        <p class="pkg-card__desc">A sacred and joyful celebration of faith and new beginnings.</p>
+                    <div class="pkg-card__img-wrap">
+                        <img src="{{ asset('images/Packages/package_christening.png') }}" alt="Christening / Baptism Package" loading="lazy">
                     </div>
-                    <span class="pkg-card__cta">Select services →</span>
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">✝️</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">Christening / Baptism Package</p>
+                            <p class="pkg-card__desc">A sacred and joyful celebration of faith and new beginnings.</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
                 </div>
 
             </div>{{-- end .packages-grid --}}
