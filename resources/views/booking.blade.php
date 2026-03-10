@@ -92,13 +92,23 @@
 
         {{-- Breadcrumb --}}
         <nav class="bk-breadcrumb" aria-label="Breadcrumb">
-            <a href="/#packages">Packages</a>
+            @if(Str::startsWith($package, 'Ala Carte'))
+                <a href="/services">Services</a>
+                <span class="sep">›</span>
+                <a href="/services">Ala Carte</a>
+            @else
+                <a href="/#packages">Packages</a>
+            @endif
             <span class="sep">›</span>
             <span class="current">Finalize Booking</span>
         </nav>
 
         {{-- ── 1. Package + Selected Services Summary ──── --}}
-        <div class="bk-label">📦 Your Selection</div>
+        @if(Str::startsWith($package, 'Ala Carte'))
+            <div class="bk-label">🛒 Your Ala Carte Selection</div>
+        @else
+            <div class="bk-label">📦 Your Selection</div>
+        @endif
         <div class="bk-summary-card">
             <h1 class="bk-pkg-name">{{ $package ?: 'Event Package' }}</h1>
             <div class="bk-service-tags">
@@ -124,6 +134,7 @@
                 $keyMap = [
                     'furniture and set‑up'  => 'Furniture and Set‑up',
                     'furniture and setup'   => 'Furniture and Set‑up',
+                    'furniture and set-up'  => 'Furniture and Set‑up',
                     'audio and visual'      => 'Audio and Visual',
                     'food and catering'     => 'Food and Catering',
                     'decorations and theme' => 'Decorations and Theme',

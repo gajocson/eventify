@@ -36,7 +36,7 @@ class BookingController extends Controller
     {
         $validated = $request->validate([
             'package_name'   => 'required|string|max:255',
-            'services'       => 'required|array|min:1',
+            'services'       => 'required|array',
             'sub_services'   => 'required|array',
             'guest_count'    => 'required|integer|min:1',
             'event_date'     => 'required|date|after:today',
