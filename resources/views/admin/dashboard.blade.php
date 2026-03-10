@@ -754,7 +754,8 @@
                     },
                 });
             } catch(e) {}
-            window.location.href = '/';
+            // Redirect with ?signedout=1 so the homepage opens the Sign In panel automatically
+            window.location.href = '/?signedout=1';
         }
 
         /* ── State ── */

@@ -48,7 +48,27 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // ── Auto-open Sign In after logout redirect ─────────────────────────────
+    // When admin (or any user) logs out and gets redirected to /?signedout=1,
+    // open the burger dropdown and show the Sign In tab automatically.
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('signedout') === '1') {
+        // Small delay to let the DOM settle
+        setTimeout(() => {
+            swapToGuestPanel();         // ensure guest panel is showing
+            showAuthForm('signin');     // show Sign In tab
+            burger.classList.add('active');
+            menu.classList.add('active');
+            showToast('You have been signed out.', 'info');
+        }, 150);
+
+        // Clean the URL so refreshing doesn't re-trigger this
+        const cleanUrl = window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+    }
 });
+
 
 // ─── Switch between Sign In / Sign Up tabs ───────────────────────────────────
 function showAuthForm(type) {
@@ -212,8 +232,8 @@ async function signOut() {
             document.getElementById('menu').classList.remove('active');
         }
     } catch (err) {
-        // Fallback: full-page reload
-        window.location.href = '/';
+        // Fallback: full-page redirect with signedout flag so Sign In panel opens
+        window.location.href = '/?signedout=1';
     }
 }
 
