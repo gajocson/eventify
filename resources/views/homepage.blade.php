@@ -201,6 +201,29 @@
                     </div>
                 </div>
 
+                {{-- ── Admin-created packages from DB ── --}}
+                @foreach($adminPackages ?? [] as $ap)
+                <div class="pkg-card" data-package="{{ $ap->name }}" role="button" tabindex="0" aria-label="Open {{ $ap->name }}">
+                    @if($ap->image_path)
+                        <div class="pkg-card__img-wrap">
+                            <img src="{{ asset($ap->image_path) }}" alt="{{ $ap->name }}" loading="lazy">
+                        </div>
+                    @else
+                        <div class="pkg-card__img-wrap" style="background:linear-gradient(135deg,#f3eafd,#e8d5f9); display:flex; align-items:center; justify-content:center; height:180px;">
+                            <span style="font-size:52px; line-height:1;">{{ $ap->emoji }}</span>
+                        </div>
+                    @endif
+                    <div class="pkg-card__content">
+                        <div class="pkg-card__icon">{{ $ap->emoji }}</div>
+                        <div class="pkg-card__body">
+                            <p class="pkg-card__title">{{ $ap->name }}</p>
+                            <p class="pkg-card__desc">{{ $ap->description }}</p>
+                        </div>
+                        <span class="pkg-card__cta">Select services →</span>
+                    </div>
+                </div>
+                @endforeach
+
             </div>{{-- end .packages-grid --}}
         </section>
 

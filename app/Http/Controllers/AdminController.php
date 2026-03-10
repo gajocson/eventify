@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EventBooking;
+use App\Models\AdminPackage;
 
 class AdminController extends Controller
 {
@@ -25,11 +26,14 @@ class AdminController extends Controller
                                     ->unique()
                                     ->count();
 
+        $adminPackages   = AdminPackage::orderByDesc('created_at')->get();
+
         return view('admin.dashboard', compact(
             'admin',
             'bookings',
             'totalBookings',
-            'totalCustomers'
+            'totalCustomers',
+            'adminPackages'
         ));
     }
 

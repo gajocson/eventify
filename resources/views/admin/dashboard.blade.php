@@ -512,6 +512,159 @@
             font-size: .8rem;
         }
 
+        /* ── Admin Packages section ── */
+        .admin-pkg-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .admin-pkg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .apkg-card {
+            background: #fff;
+            border-radius: 20px;
+            border: 1.5px solid #ede8f5;
+            box-shadow: 0 4px 16px rgba(107,61,154,.07);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .28s ease, border-color .22s ease;
+            cursor: default;
+            position: relative;
+        }
+        .apkg-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 38px rgba(107,61,154,.15);
+            border-color: #c4a9e0;
+        }
+
+        .apkg-card__img-wrap {
+            width: 100%;
+            height: 165px;
+            overflow: hidden;
+            position: relative;
+        }
+        .apkg-card__img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .45s ease;
+        }
+        .apkg-card:hover .apkg-card__img-wrap img { transform: scale(1.07); }
+
+        /* No-image placeholder */
+        .apkg-card__img-placeholder {
+            width: 100%;
+            height: 165px;
+            background: linear-gradient(135deg, #f3eafd, #e8d5f9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .apkg-card__content {
+            padding: 18px 18px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .apkg-card__header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .apkg-card__icon {
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg,#f3eafd,#e8d5f9);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
+        }
+        .apkg-card__name {
+            font-size: 14.5px; font-weight: 700; color: #1a0a2e;
+            margin: 0; line-height: 1.25;
+        }
+        .apkg-card__desc {
+            font-size: 12.5px; color: #7a6091;
+            margin: 0; line-height: 1.5;
+        }
+        .apkg-card__footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 4px;
+        }
+        .apkg-price {
+            font-size: 13px; font-weight: 700;
+            color: #6a3da6;
+        }
+        .apkg-static-badge {
+            font-size: 11px; color: #a08ab8;
+            background: #f3eafd;
+            border: 1px solid #d4b4f2;
+            border-radius: 50px;
+            padding: 2px 9px;
+        }
+        .apkg-delete-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #c0334a;
+            opacity: 0.6;
+            transition: opacity .2s;
+            padding: 2px 4px;
+            border-radius: 6px;
+        }
+        .apkg-delete-btn:hover { opacity: 1; background: rgba(192,51,74,.08); }
+
+        /* ── Add Package modal form fields ── */
+        .adm-form-group { margin-bottom: 18px; }
+        .adm-label {
+            display: block;
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a08ab8;
+            margin-bottom: 7px;
+        }
+        .adm-input {
+            width: 100%;
+            background: #faf7ff;
+            border: 1.5px solid #ede8f5;
+            border-radius: 12px;
+            color: #1a0a2e;
+            font-family: 'Inter', sans-serif;
+            font-size: .88rem;
+            padding: 11px 14px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .adm-input:focus {
+            border-color: #8b4cc8;
+            box-shadow: 0 0 0 3px rgba(139,76,200,.12);
+        }
+        .adm-input[type="file"] { cursor: pointer; }
+        .adm-img-preview {
+            margin-top: 10px;
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1.5px solid #d4b4f2;
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .admin-banner { flex-direction: column; text-align: center; padding: 28px 20px; }
             .admin-page   { padding: 20px 16px 40px; }
@@ -519,6 +672,7 @@
             .bookings-table td:nth-child(3),
             .bookings-table th:nth-child(4),
             .bookings-table td:nth-child(4) { display: none; }
+            .admin-pkg-grid { grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 14px; }
         }
     </style>
 </head>
@@ -649,6 +803,83 @@
             @endif
         </div>
 
+        {{-- ═══════════════════════════
+             PACKAGES SECTION
+        ════════════════════════════ --}}
+        <div class="admin-pkg-section-header">
+            <h2 class="admin-section-title" style="margin:0;">📦 Packages</h2>
+            <button class="adm-btn adm-btn--primary adm-btn--small" onclick="openAddPkgModal()">
+                <span style="font-size:16px; line-height:1;">✚</span> Add Package
+            </button>
+        </div>
+
+        <div class="admin-pkg-grid" id="adminPkgGrid">
+
+            {{-- ── Static default package cards ── --}}
+            @php
+            $staticPackages = [
+                ['name'=>'Wedding Package',           'emoji'=>'💍', 'img'=>'images/Packages/package_wedding.png',       'desc'=>'Timeless ceremonies and elegant receptions.'],
+                ['name'=>'Birthday Party Package',    'emoji'=>'🎂', 'img'=>'images/Packages/package_birthday.png',      'desc'=>'Fun, vibrant celebrations for every age.'],
+                ['name'=>'Debut Package',             'emoji'=>'👑', 'img'=>'images/Packages/package_debut.png',         'desc'=>'An unforgettable night for the milestone of 18.'],
+                ['name'=>'Corporate Event Package',   'emoji'=>'🏢', 'img'=>'images/Packages/package_corporate.png',     'desc'=>'Professional gatherings and conferences done right.'],
+                ['name'=>'Engagement Party Package',  'emoji'=>'💒', 'img'=>'images/Packages/package_engagement.png',   'desc'=>'Celebrate your "yes" with style and intimacy.'],
+                ['name'=>'Baby Shower Package',       'emoji'=>'🍼', 'img'=>'images/Packages/package_babyshower.png',   'desc'=>'Sweet, playful showers welcoming your new arrival.'],
+                ['name'=>'Graduation Party Package',  'emoji'=>'🎓', 'img'=>'images/Packages/package_graduation.png',   'desc'=>'Honor every milestone and dream achieved.'],
+                ['name'=>'Anniversary Celebration Package', 'emoji'=>'🥂','img'=>'images/Packages/package_anniversary.png','desc'=>'Renew your love story with a memorable celebration.'],
+                ['name'=>'Product Launch Event Package','emoji'=>'🚀','img'=>'images/Packages/package_productlaunch.png','desc'=>'Make a powerful first impression at your launch.'],
+                ['name'=>'Christening / Baptism Package','emoji'=>'✝️','img'=>'images/Packages/package_christening.png', 'desc'=>'A sacred and joyful celebration of faith.'],
+            ];
+            @endphp
+
+            @foreach($staticPackages as $sp)
+            <div class="apkg-card">
+                <div class="apkg-card__img-wrap">
+                    <img src="{{ asset($sp['img']) }}" alt="{{ $sp['name'] }}" loading="lazy">
+                </div>
+                <div class="apkg-card__content">
+                    <div class="apkg-card__header">
+                        <div class="apkg-card__icon">{{ $sp['emoji'] }}</div>
+                        <p class="apkg-card__name">{{ $sp['name'] }}</p>
+                    </div>
+                    <p class="apkg-card__desc">{{ $sp['desc'] }}</p>
+                    <div class="apkg-card__footer">
+                        <span class="apkg-static-badge">Default</span>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+            {{-- ── Admin-created packages from DB ── --}}
+            @foreach($adminPackages as $ap)
+            <div class="apkg-card" id="apkg-{{ $ap->id }}">
+                @if($ap->image_path)
+                    <div class="apkg-card__img-wrap">
+                        <img src="{{ asset($ap->image_path) }}" alt="{{ $ap->name }}" loading="lazy">
+                    </div>
+                @else
+                    <div class="apkg-card__img-placeholder">{{ $ap->emoji }}</div>
+                @endif
+                <div class="apkg-card__content">
+                    <div class="apkg-card__header">
+                        <div class="apkg-card__icon">{{ $ap->emoji }}</div>
+                        <p class="apkg-card__name">{{ $ap->name }}</p>
+                    </div>
+                    <p class="apkg-card__desc">{{ $ap->description }}</p>
+                    <div class="apkg-card__footer">
+                        @if($ap->base_price)
+                            <span class="apkg-price">From ₱{{ number_format($ap->base_price, 0) }}</span>
+                        @else
+                            <span class="apkg-price" style="color:#a08ab8;">Custom pricing</span>
+                        @endif
+                        <button class="apkg-delete-btn" title="Delete package"
+                            onclick="deletePackage({{ $ap->id }}, this)">🗑</button>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+        </div>{{-- #adminPkgGrid --}}
+
         {{-- Sign Out --}}
         <div class="admin-signout-wrap">
             <button class="admin-signout-btn" onclick="adminSignOut()">
@@ -686,6 +917,64 @@
     <script>
     window.ADMIN_BOOKINGS = @json($bookingsJson);
     </script>
+
+    {{-- ═══════════════════════════════════════════════
+         ADD PACKAGE MODAL
+    ════════════════════════════════════════════════ --}}
+    <div class="adm-backdrop" id="addPkgBackdrop">
+        <div class="adm-modal" style="max-width:520px;">
+            <button class="adm-modal__close" onclick="closeAddPkgModal()">✕</button>
+
+            <h2 class="adm-modal__title">📦 Add New Package</h2>
+            <p class="adm-modal__sub">Fill in the details below to create a new event package card.</p>
+
+            {{-- Error area --}}
+            <div id="addPkgError" style="display:none; background:#fde8ea; border:1px solid #f0aab5; border-radius:10px; padding:10px 14px; font-size:.82rem; color:#c0334a; margin-bottom:16px;"></div>
+
+            {{-- Package Name --}}
+            <div class="adm-form-group">
+                <label class="adm-label" for="pkgName">Package Name <span style="color:#c0334a;">*</span></label>
+                <input class="adm-input" type="text" id="pkgName" placeholder="e.g. Premium Gala Package" maxlength="120">
+            </div>
+
+            {{-- Emoji + Price row --}}
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div class="adm-form-group" style="margin-bottom:0;">
+                    <label class="adm-label" for="pkgEmoji">Emoji Icon</label>
+                    <input class="adm-input" type="text" id="pkgEmoji" placeholder="📦" maxlength="10" style="font-size:1.4rem; text-align:center;">
+                </div>
+                <div class="adm-form-group" style="margin-bottom:0;">
+                    <label class="adm-label" for="pkgPrice">Base Price (₱)</label>
+                    <input class="adm-input" type="number" id="pkgPrice" placeholder="e.g. 25000" min="0" step="0.01">
+                </div>
+            </div>
+
+            {{-- Description --}}
+            <div class="adm-form-group" style="margin-top:18px;">
+                <label class="adm-label" for="pkgDesc">Short Description</label>
+                <textarea class="adm-input adm-textarea" id="pkgDesc" rows="3" maxlength="500"
+                    placeholder="A brief summary of what this package includes…" style="min-height:80px; resize:vertical;"></textarea>
+            </div>
+
+            {{-- Image upload --}}
+            <div class="adm-form-group">
+                <label class="adm-label" for="pkgImage">Package Image (JPEG / PNG / WebP, max 4 MB)</label>
+                <input class="adm-input" type="file" id="pkgImage" accept="image/jpeg,image/png,image/webp"
+                    onchange="previewPkgImage(this)">
+                <img id="pkgImgPreview" class="adm-img-preview" alt="Image preview">
+            </div>
+
+            {{-- Actions --}}
+            <div style="display:flex; gap:12px; margin-top:6px; flex-wrap:wrap;">
+                <button class="adm-btn adm-btn--primary" id="addPkgSubmitBtn" onclick="submitPackage()">
+                    ✚ Create Package
+                </button>
+                <button class="adm-btn adm-btn--outline" onclick="closeAddPkgModal()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
 
     {{-- ═══════════════════════════════════════════════
          BOOKING DETAIL MODAL
@@ -1037,6 +1326,7 @@
             if (e.key === 'Escape') {
                 closeContactModal();
                 closeBookingModal();
+                closeAddPkgModal();
             }
         });
 
@@ -1111,6 +1401,211 @@
             } finally {
                 btn.disabled = false;
                 btn.textContent = '📨 Send Message';
+            }
+        }
+    </script>
+
+    <script>
+        /* ═══════════════════════════════════════════
+           ADD PACKAGE MODAL — JS
+        ═══════════════════════════════════════════ */
+
+        function openAddPkgModal() {
+            // Reset form
+            document.getElementById('pkgName').value    = '';
+            document.getElementById('pkgEmoji').value   = '';
+            document.getElementById('pkgDesc').value    = '';
+            document.getElementById('pkgPrice').value   = '';
+            document.getElementById('pkgImage').value   = '';
+            const preview = document.getElementById('pkgImgPreview');
+            preview.src = ''; preview.style.display = 'none';
+            document.getElementById('addPkgError').style.display = 'none';
+
+            const backdrop = document.getElementById('addPkgBackdrop');
+            backdrop.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => document.getElementById('pkgName').focus(), 80);
+        }
+
+        function closeAddPkgModal() {
+            document.getElementById('addPkgBackdrop').classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('addPkgBackdrop').addEventListener('click', function(e) {
+            if (e.target === this) closeAddPkgModal();
+        });
+
+        /* Image preview */
+        function previewPkgImage(input) {
+            const preview = document.getElementById('pkgImgPreview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = ''; preview.style.display = 'none';
+            }
+        }
+
+        /* Submit new package */
+        async function submitPackage() {
+            const name  = document.getElementById('pkgName').value.trim();
+            const emoji = document.getElementById('pkgEmoji').value.trim();
+            const desc  = document.getElementById('pkgDesc').value.trim();
+            const price = document.getElementById('pkgPrice').value.trim();
+            const imageInput = document.getElementById('pkgImage');
+
+            const errEl = document.getElementById('addPkgError');
+            errEl.style.display = 'none';
+
+            if (!name) {
+                errEl.textContent = 'Package name is required.';
+                errEl.style.display = 'block';
+                document.getElementById('pkgName').focus();
+                return;
+            }
+
+            const fd = new FormData();
+            fd.append('name',        name);
+            fd.append('emoji',       emoji || '📦');
+            fd.append('description', desc);
+            if (price) fd.append('base_price', price);
+            if (imageInput.files[0]) fd.append('image', imageInput.files[0]);
+
+            const btn = document.getElementById('addPkgSubmitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Saving…';
+
+            try {
+                const res  = await fetch('/admin/packages', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN':     document.querySelector('meta[name="csrf-token"]').content,
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept':           'application/json',
+                    },
+                    body: fd,
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    // Laravel validation errors come back as {errors: {field: ['message']}}
+                    if (data.errors) {
+                        const msgs = Object.values(data.errors).flat().join(' ');
+                        errEl.textContent = msgs;
+                    } else {
+                        errEl.textContent = data.message || 'Something went wrong. Please try again.';
+                    }
+                    errEl.style.display = 'block';
+                    return;
+                }
+
+                if (data.success) {
+                    // Inject new card at beginning of the DB packages (after static ones)
+                    const grid    = document.getElementById('adminPkgGrid');
+                    const newCard = buildPkgCard(data.package);
+                    grid.appendChild(newCard);
+
+                    // Briefly highlight the new card
+                    newCard.style.outline = '2px solid #8b4cc8';
+                    setTimeout(() => { newCard.style.outline = ''; }, 2000);
+
+                    closeAddPkgModal();
+
+                    if (typeof window.showToast === 'function') {
+                        window.showToast('success', `✅ Package "${data.package.name}" created successfully!`, 4000);
+                    }
+                }
+            } catch(err) {
+                errEl.textContent = '❌ Network error: ' + err.message;
+                errEl.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '✚ Create Package';
+            }
+        }
+
+        /* Build a new package card DOM element from the API response */
+        function buildPkgCard(pkg) {
+            const card  = document.createElement('div');
+            card.className = 'apkg-card';
+            card.id        = 'apkg-' + pkg.id;
+
+            const imgSection = pkg.image_url
+                ? `<div class="apkg-card__img-wrap"><img src="${pkg.image_url}" alt="${escHtml(pkg.name)}" loading="lazy"></div>`
+                : `<div class="apkg-card__img-placeholder">${escHtml(pkg.emoji)}</div>`;
+
+            const priceSection = pkg.base_price
+                ? `<span class="apkg-price">From ₱${Number(pkg.base_price).toLocaleString('en-PH')}</span>`
+                : `<span class="apkg-price" style="color:#a08ab8;">Custom pricing</span>`;
+
+            card.innerHTML = `
+                ${imgSection}
+                <div class="apkg-card__content">
+                    <div class="apkg-card__header">
+                        <div class="apkg-card__icon">${escHtml(pkg.emoji)}</div>
+                        <p class="apkg-card__name">${escHtml(pkg.name)}</p>
+                    </div>
+                    <p class="apkg-card__desc">${escHtml(pkg.description || '')}</p>
+                    <div class="apkg-card__footer">
+                        ${priceSection}
+                        <button class="apkg-delete-btn" title="Delete package"
+                            onclick="deletePackage(${pkg.id}, this)">🗑</button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        function escHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        /* Delete an admin-created package */
+        async function deletePackage(id, btn) {
+            if (!confirm('Delete this package? This cannot be undone.')) return;
+
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`/admin/packages/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN':     document.querySelector('meta[name="csrf-token"]').content,
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept':           'application/json',
+                    },
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    const card = document.getElementById('apkg-' + id);
+                    if (card) {
+                        card.style.transition = 'opacity .35s ease, transform .35s ease';
+                        card.style.opacity    = '0';
+                        card.style.transform  = 'scale(0.9)';
+                        setTimeout(() => card.remove(), 360);
+                    }
+                    if (typeof window.showToast === 'function') {
+                        window.showToast('success', '🗑 Package deleted.');
+                    }
+                } else {
+                    throw new Error(data.message || 'Delete failed.');
+                }
+            } catch(err) {
+                btn.disabled = false;
+                if (typeof window.showToast === 'function') {
+                    window.showToast('error', '❌ ' + err.message);
+                }
             }
         }
     </script>

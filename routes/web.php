@@ -8,10 +8,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PackageController;
 
 // ─── Public pages ─────────────────────────────────────────────────────────────
 Route::get('/', function () {
-    return view('homepage');
+    $adminPackages = \App\Models\AdminPackage::orderBy('created_at')->get();
+    return view('homepage', compact('adminPackages'));
 });
 
 Route::get('/services', function () {
@@ -19,7 +21,8 @@ Route::get('/services', function () {
 })->name('services');
 
 Route::get('/packages', function () {
-    return view('homepage'); // swap with packages view when ready
+    $adminPackages = \App\Models\AdminPackage::orderBy('created_at')->get();
+    return view('homepage', compact('adminPackages')); // swap with packages view when ready
 })->name('packages');
 
 // ─── Registration ──────────────────────────────────────────────────────────────
@@ -52,4 +55,8 @@ Route::middleware(['auth:customer', 'admin'])->group(function () {
     // Messaging (now handled by MessageController)
     Route::patch('/admin/bookings/{id}/message',  [MessageController::class, 'adminSend'])->name('admin.booking.message');
     Route::get('/admin/bookings/{id}/messages',   [MessageController::class, 'adminThread'])->name('admin.booking.messages');
+
+    // Package management
+    Route::post('/admin/packages',         [PackageController::class, 'store'])->name('admin.package.store');
+    Route::delete('/admin/packages/{id}',  [PackageController::class, 'destroy'])->name('admin.package.destroy');
 });
