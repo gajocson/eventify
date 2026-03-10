@@ -1,119 +1,134 @@
 /* =================================================
    Eventify — booking.css
-   Booking page styles: premium, dark, consistent
-   with the Eventify brand.
+   Booking page styles — light, lavender-purple theme
+   fully consistent with Eventify homepage branding.
    ================================================= */
 
-/* ---- CSS Reset / Variables ------------------------------------------- */
+/* ── Variables ─────────────────────────────────── */
 :root {
-    --ev-bg: #0d0d12;
-    --ev-surface: #16161f;
-    --ev-card: #1c1c28;
-    --ev-card-hover: #22223a;
-    --ev-border: rgba(255, 255, 255, .08);
-    --ev-accent: #7c4dff;
-    --ev-accent-glow: rgba(124, 77, 255, .35);
-    --ev-accent2: #ff6b8a;
-    --ev-gold: #f5c518;
-    --ev-text: #e8e8f0;
-    --ev-muted: #8888aa;
-    --ev-success: #34d399;
-    --radius-lg: 16px;
-    --radius-md: 10px;
-    --radius-sm: 6px;
-    --transition: .2s ease;
-    --font: 'Inter', sans-serif;
-    --shadow-md: 0 8px 32px rgba(0, 0, 0, .45);
-    --shadow-glow: 0 0 24px var(--ev-accent-glow);
+    --ev-page-bg: #e3d9e7;
+    --ev-white: #ffffff;
+    --ev-card: #ffffff;
+    --ev-card-soft: #faf7ff;
+    --ev-border: #ede8f5;
+    --ev-border-focus: #c4a9e0;
+
+    --ev-purple: #8b4cc8;
+    --ev-purple-dark: #5a2d82;
+    --ev-purple-light: #f3eafd;
+    --ev-purple-mid: #e8d5f9;
+    --ev-purple-tag: #ede3fa;
+
+    --ev-text: #1a0a2e;
+    --ev-text-muted: #7a6091;
+    --ev-text-label: #a08ab8;
+
+    --ev-success: #2e7d3e;
+    --ev-success-bg: #edfaf0;
+
+    --ev-radius-xl: 20px;
+    --ev-radius-lg: 16px;
+    --ev-radius-md: 14px;
+    --ev-radius-sm: 10px;
+    --ev-radius-pill: 50px;
+
+    --ev-shadow-card: 0 4px 16px rgba(107, 61, 154, .09), 0 1px 4px rgba(0, 0, 0, .04);
+    --ev-shadow-btn: 0 6px 20px rgba(107, 61, 154, .35);
+    --ev-shadow-btn-h: 0 10px 28px rgba(107, 61, 154, .48);
+
+    --ev-font: 'Inter', sans-serif;
+    --ev-transition: .22s ease;
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+/* ── Base ──────────────────────────────────────── */
+body {
+    font-family: var(--ev-font);
+    background: var(--ev-page-bg);
+    color: var(--ev-text);
     margin: 0;
     padding: 0;
-}
-
-body {
-    font-family: var(--font);
-    background: var(--ev-bg);
-    color: var(--ev-text);
     min-height: 100vh;
 }
 
-/* ---- Page layout ------------------------------------------------------ */
+/* ── Page layout ───────────────────────────────── */
 .bk-page {
-    max-width: 820px;
+    max-width: 840px;
     margin: 0 auto;
-    padding: 40px 20px 100px;
+    padding: 36px 20px 100px;
+    font-family: var(--ev-font);
 }
 
-/* ---- Page header / breadcrumb ----------------------------------------- */
+/* ── Breadcrumb ────────────────────────────────── */
 .bk-breadcrumb {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: .83rem;
-    color: var(--ev-muted);
-    margin-bottom: 32px;
+    font-size: .8rem;
+    color: var(--ev-text-muted);
+    margin-bottom: 28px;
 }
 
 .bk-breadcrumb a {
-    color: var(--ev-muted);
+    color: var(--ev-purple);
     text-decoration: none;
-    transition: color var(--transition);
+    font-weight: 500;
+    transition: color var(--ev-transition);
 }
 
 .bk-breadcrumb a:hover {
-    color: var(--ev-text);
+    color: var(--ev-purple-dark);
 }
 
 .bk-breadcrumb .sep {
-    opacity: .4;
+    color: #c4aed8;
+    font-size: .75rem;
 }
 
 .bk-breadcrumb .current {
     color: var(--ev-text);
+    font-weight: 600;
 }
 
-/* ---- Section label ---------------------------------------------------- */
+/* ── Section eyebrow label ─────────────────────── */
 .bk-label {
-    font-size: .75rem;
+    display: inline-block;
+    font-size: .72rem;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--ev-accent);
+    color: var(--ev-purple);
     margin-bottom: 8px;
 }
 
-/* ---- Package summary card --------------------------------------------- */
+/* ── Package Summary Card ──────────────────────── */
 .bk-summary-card {
-    background: var(--ev-card);
-    border: 1px solid var(--ev-border);
-    border-radius: var(--radius-lg);
+    background: var(--ev-white);
+    border: 1.5px solid var(--ev-border);
+    border-radius: var(--ev-radius-xl);
     padding: 28px 32px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--ev-shadow-card);
 }
 
+/* Purple top accent bar — matches pkg-card */
 .bk-summary-card::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(124, 77, 255, .06) 0%, transparent 60%);
-    pointer-events: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8b4cc8, #c07ef0);
+    border-radius: var(--ev-radius-xl) var(--ev-radius-xl) 0 0;
 }
 
 .bk-pkg-name {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #fff 0%, #b8b0ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 16px;
+    color: var(--ev-text);
+    margin: 0 0 16px;
     line-height: 1.2;
 }
 
@@ -126,80 +141,88 @@ body {
 .bk-service-tag {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: rgba(124, 77, 255, .15);
-    border: 1px solid rgba(124, 77, 255, .3);
-    color: #c0b0ff;
-    font-size: .78rem;
+    gap: 5px;
+    background: linear-gradient(135deg, #f3eafd, #ede3fa);
+    border: 1px solid #d4b4f2;
+    color: #6a3da6;
+    font-size: .76rem;
     font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 20px;
+    padding: 5px 13px;
+    border-radius: var(--ev-radius-pill);
 }
 
 .bk-service-tag::before {
     content: '✓';
-    color: var(--ev-accent);
+    color: var(--ev-purple);
+    font-weight: 800;
 }
 
-/* ---- Section heading -------------------------------------------------- */
+/* ── Section heading ───────────────────────────── */
 .bk-section {
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .bk-section-title {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--ev-text);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .bk-section-title .icon {
-    font-size: 1.2em;
+    font-size: 1.15em;
 }
 
-/* ---- Sub-service accordion -------------------------------------------- */
+/* ── Sub-service Accordion ─────────────────────── */
 .subsvc-accordion {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .subsvc-group {
-    background: var(--ev-card);
-    border: 1px solid var(--ev-border);
-    border-radius: var(--radius-md);
+    background: var(--ev-white);
+    border: 1.5px solid var(--ev-border);
+    border-radius: var(--ev-radius-lg);
     overflow: hidden;
-    transition: border-color var(--transition);
+    box-shadow: 0 2px 8px rgba(107, 61, 154, .05);
+    transition: border-color var(--ev-transition), box-shadow var(--ev-transition);
 }
 
-.subsvc-group:focus-within,
-.subsvc-group:hover {
-    border-color: rgba(124, 77, 255, .3);
+.subsvc-group:hover,
+.subsvc-group:focus-within {
+    border-color: var(--ev-border-focus);
+    box-shadow: 0 4px 16px rgba(107, 61, 154, .1);
 }
 
+/* Accordion header — acts as a button */
 .subsvc-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 15px 20px;
     cursor: pointer;
     user-select: none;
     background: transparent;
     border: none;
     width: 100%;
     color: var(--ev-text);
-    font-family: var(--font);
-    font-size: .95rem;
+    font-family: var(--ev-font);
+    font-size: .92rem;
     font-weight: 600;
-    gap: 12px;
-    transition: background var(--transition);
+    gap: 10px;
+    transition: background var(--ev-transition);
 }
 
 .subsvc-header:hover {
-    background: rgba(255, 255, 255, .03);
+    background: #faf7ff;
+}
+
+.subsvc-group.is-open .subsvc-header {
+    background: #faf7ff;
 }
 
 .subsvc-header-left {
@@ -209,16 +232,18 @@ body {
 }
 
 .subsvc-icon {
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
+/* Selected count badge */
 .subsvc-badge {
-    font-size: .7rem;
+    font-size: .68rem;
     font-weight: 700;
-    background: rgba(124, 77, 255, .2);
-    color: #b0a0ff;
+    background: linear-gradient(135deg, #f3eafd, #ede3fa);
+    border: 1px solid #d4b4f2;
+    color: #6a3da6;
     border-radius: 20px;
-    padding: 2px 8px;
+    padding: 2px 9px;
     display: none;
 }
 
@@ -226,16 +251,18 @@ body {
     display: inline-block;
 }
 
+/* Chevron arrow */
 .subsvc-chevron {
-    font-size: 1rem;
+    font-size: .85rem;
     transition: transform .25s ease;
-    color: var(--ev-muted);
+    color: var(--ev-text-muted);
 }
 
 .subsvc-group.is-open .subsvc-chevron {
     transform: rotate(180deg);
 }
 
+/* Collapsible body */
 .subsvc-body {
     max-height: 0;
     overflow: hidden;
@@ -243,14 +270,15 @@ body {
 }
 
 .subsvc-group.is-open .subsvc-body {
-    max-height: 800px;
+    max-height: 900px;
 }
 
+/* 2-column grid of sub-service items */
 .subsvc-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    padding: 4px 20px 20px;
+    padding: 4px 18px 18px;
 }
 
 @media (max-width: 520px) {
@@ -259,33 +287,33 @@ body {
     }
 }
 
-/* Sub-service checkbox item */
+/* Individual checkbox item */
 .subsvc-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--ev-surface);
-    border: 1px solid var(--ev-border);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
+    background: #faf7ff;
+    border: 1.5px solid var(--ev-border);
+    border-radius: var(--ev-radius-sm);
+    padding: 10px 13px;
     cursor: pointer;
-    transition: border-color var(--transition), background var(--transition);
+    transition: border-color var(--ev-transition), background var(--ev-transition);
 }
 
 .subsvc-item:hover {
-    border-color: rgba(124, 77, 255, .4);
-    background: rgba(124, 77, 255, .06);
+    border-color: var(--ev-border-focus);
+    background: #f3eafd;
 }
 
 .subsvc-item.is-checked {
-    border-color: var(--ev-accent);
-    background: rgba(124, 77, 255, .12);
+    border-color: #b890e8;
+    background: linear-gradient(135deg, #f3eafd, #ede3fa);
 }
 
 .subsvc-item input[type="checkbox"] {
     width: 16px;
     height: 16px;
-    accent-color: var(--ev-accent);
+    accent-color: var(--ev-purple);
     cursor: pointer;
     flex-shrink: 0;
 }
@@ -296,7 +324,7 @@ body {
 }
 
 .subsvc-item__name {
-    font-size: .83rem;
+    font-size: .8rem;
     font-weight: 600;
     color: var(--ev-text);
     white-space: nowrap;
@@ -305,17 +333,17 @@ body {
 }
 
 .subsvc-item__price {
-    font-size: .75rem;
-    color: var(--ev-accent);
+    font-size: .72rem;
+    color: var(--ev-purple);
     font-weight: 700;
     margin-top: 2px;
 }
 
-/* ---- User inputs section ---------------------------------------------- */
+/* ── Event Detail Inputs ────────────────────────── */
 .bk-inputs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 14px;
 }
 
 @media (max-width: 520px) {
@@ -331,108 +359,151 @@ body {
 }
 
 .bk-field label {
-    font-size: .8rem;
-    font-weight: 600;
-    color: var(--ev-muted);
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--ev-text-label);
     text-transform: uppercase;
-    letter-spacing: .8px;
+    letter-spacing: 1px;
 }
 
 .bk-field input {
-    background: var(--ev-card);
-    border: 1px solid var(--ev-border);
-    border-radius: var(--radius-sm);
+    background: var(--ev-white);
+    border: 1.5px solid var(--ev-border);
+    border-radius: var(--ev-radius-md);
     color: var(--ev-text);
-    font-family: var(--font);
-    font-size: .95rem;
-    padding: 12px 16px;
-    transition: border-color var(--transition), box-shadow var(--transition);
+    font-family: var(--ev-font);
+    font-size: .92rem;
+    padding: 12px 15px;
+    transition: border-color var(--ev-transition), box-shadow var(--ev-transition);
     outline: none;
     width: 100%;
+    box-shadow: 0 1px 4px rgba(107, 61, 154, .05);
 }
 
 .bk-field input:focus {
-    border-color: var(--ev-accent);
-    box-shadow: 0 0 0 3px var(--ev-accent-glow);
+    border-color: var(--ev-purple);
+    box-shadow: 0 0 0 3px rgba(139, 76, 200, .14);
+}
+
+.bk-field input::placeholder {
+    color: #bca9cf;
 }
 
 .bk-field input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(.7);
+    filter: invert(0.35) sepia(1) saturate(3) hue-rotate(250deg);
     cursor: pointer;
+    opacity: .7;
 }
 
-/* ---- Price display ---------------------------------------------------- */
+/* ── Total Price Card ───────────────────────────── */
 .bk-price-card {
-    background: linear-gradient(135deg, rgba(124, 77, 255, .12) 0%, rgba(255, 107, 138, .06) 100%);
-    border: 1px solid rgba(124, 77, 255, .3);
-    border-radius: var(--radius-lg);
-    padding: 24px 28px;
+    background: linear-gradient(135deg, #f3eafd 0%, #ede3fa 100%);
+    border: 1.5px solid #d4b4f2;
+    border-radius: var(--ev-radius-lg);
+    padding: 22px 26px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
-    margin-top: 24px;
+    margin-top: 22px;
+    box-shadow: 0 4px 18px rgba(107, 61, 154, .1);
 }
 
 .bk-price-label {
     font-size: .85rem;
-    color: var(--ev-muted);
-    font-weight: 500;
+    color: var(--ev-text);
+    font-weight: 700;
 }
 
 .bk-price-sub {
-    font-size: .78rem;
-    color: var(--ev-muted);
-    margin-top: 4px;
+    font-size: .72rem;
+    color: var(--ev-text-muted);
+    margin-top: 3px;
 }
 
 .bk-price-amount {
     font-size: 2rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #fff 0%, #b8b0ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--ev-purple-dark);
     white-space: nowrap;
 }
 
-/* ---- Review Payment button -------------------------------------------- */
+/* ── Review Payment Button ──────────────────────── */
 .bk-review-btn {
     display: block;
     width: 100%;
-    margin-top: 28px;
-    padding: 16px;
-    font-family: var(--font);
-    font-size: 1rem;
+    margin-top: 24px;
+    padding: 15px;
+    font-family: var(--ev-font);
+    font-size: .97rem;
     font-weight: 700;
     color: #fff;
-    background: linear-gradient(135deg, var(--ev-accent) 0%, #ff6b8a 100%);
+    background: linear-gradient(135deg, #8b4cc8, #5a2d82);
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: var(--ev-radius-md);
     cursor: pointer;
-    transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
-    letter-spacing: .5px;
-    box-shadow: 0 4px 20px var(--ev-accent-glow);
+    transition: all var(--ev-transition);
+    letter-spacing: .3px;
+    box-shadow: var(--ev-shadow-btn);
 }
 
 .bk-review-btn:hover {
-    opacity: .9;
+    background: linear-gradient(135deg, #9d5de0, #6b3da6);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px var(--ev-accent-glow);
+    box-shadow: var(--ev-shadow-btn-h);
 }
 
 .bk-review-btn:active {
     transform: translateY(0);
 }
 
-/* ---- Payment modal backdrop ------------------------------------------- */
+/* ── Divider ────────────────────────────────────── */
+.bk-divider {
+    border: none;
+    border-top: 1.5px solid var(--ev-border);
+    margin: 26px 0;
+}
+
+/* ── Empty state ────────────────────────────────── */
+.bk-no-selection {
+    text-align: center;
+    padding: 52px 20px;
+    color: var(--ev-text-muted);
+    font-size: .9rem;
+    background: var(--ev-white);
+    border: 1.5px dashed var(--ev-border-focus);
+    border-radius: var(--ev-radius-lg);
+}
+
+.bk-no-selection .icon {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.bk-no-selection a {
+    color: var(--ev-purple);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.bk-no-selection a:hover {
+    text-decoration: underline;
+}
+
+/* ════════════════════════════════════════════════
+   PAYMENT MODAL
+   ════════════════════════════════════════════════ */
+
+/* Backdrop */
 .pay-backdrop {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .65);
-    backdrop-filter: blur(6px);
+    background: rgba(12, 5, 26, .52);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 9000;
     align-items: center;
     justify-content: center;
@@ -443,22 +514,24 @@ body {
     display: flex;
 }
 
+/* Modal panel */
 .pay-modal {
-    background: var(--ev-surface);
-    border: 1px solid var(--ev-border);
-    border-radius: var(--radius-lg);
-    padding: 36px 32px;
+    background: var(--ev-white);
+    border-radius: 24px;
+    padding: 36px 32px 30px;
     width: 100%;
     max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
-    box-shadow: var(--shadow-md);
-    animation: modalIn .25s ease;
+    box-shadow: 0 32px 80px rgba(12, 5, 26, .28), 0 8px 24px rgba(0, 0, 0, .12);
+    animation: payModalIn .28s cubic-bezier(.34, 1.4, .64, 1);
 }
 
-@keyframes modalIn {
+@keyframes payModalIn {
     from {
         opacity: 0;
-        transform: scale(.96) translateY(12px);
+        transform: scale(.96) translateY(14px);
     }
 
     to {
@@ -467,81 +540,124 @@ body {
     }
 }
 
+/* Scrollbar */
+.pay-modal::-webkit-scrollbar {
+    width: 4px;
+}
+
+.pay-modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.pay-modal::-webkit-scrollbar-thumb {
+    background: rgba(139, 76, 200, .2);
+    border-radius: 10px;
+}
+
+/* Close button */
 .pay-modal__close {
     position: absolute;
     top: 16px;
-    right: 16px;
-    background: rgba(255, 255, 255, .08);
+    right: 18px;
+    background: rgba(139, 76, 200, .08);
     border: none;
-    color: var(--ev-muted);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: .9rem;
-    cursor: pointer;
+    border-radius: 10px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background var(--transition), color var(--transition);
+    cursor: pointer;
+    font-size: 17px;
+    color: #7a5e9a;
+    transition: background var(--ev-transition), color var(--ev-transition);
+    line-height: 1;
 }
 
 .pay-modal__close:hover {
-    background: rgba(255, 255, 255, .15);
-    color: var(--ev-text);
+    background: rgba(139, 76, 200, .16);
+    color: var(--ev-purple-dark);
 }
 
+/* Modal title & subtitle */
 .pay-modal__title {
     font-size: 1.3rem;
     font-weight: 800;
-    margin-bottom: 6px;
+    color: var(--ev-text);
+    margin: 0 0 4px;
 }
 
 .pay-modal__subtitle {
-    font-size: .85rem;
-    color: var(--ev-muted);
-    margin-bottom: 24px;
+    font-size: .82rem;
+    color: var(--ev-text-muted);
+    margin: 0 0 22px;
+    line-height: 1.5;
 }
 
-/* Payment option cards */
+/* Amount display */
+.pay-modal__amount {
+    background: var(--ev-card-soft);
+    border: 1.5px solid var(--ev-border);
+    border-radius: var(--ev-radius-sm);
+    padding: 13px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    font-size: .88rem;
+}
+
+.pay-modal__amount-label {
+    color: var(--ev-text-muted);
+    font-weight: 500;
+}
+
+.pay-modal__amount-value {
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--ev-purple-dark);
+}
+
+/* ── Payment option cards ───────────────────────── */
 .pay-options {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 24px;
+    gap: 8px;
+    margin-bottom: 22px;
 }
 
 .pay-option {
     display: flex;
     align-items: center;
-    gap: 14px;
-    background: var(--ev-card);
-    border: 2px solid var(--ev-border);
-    border-radius: var(--radius-md);
-    padding: 14px 18px;
+    gap: 13px;
+    background: #faf7ff;
+    border: 1.5px solid var(--ev-border);
+    border-radius: var(--ev-radius-md);
+    padding: 13px 16px;
     cursor: pointer;
-    transition: border-color var(--transition), background var(--transition);
+    transition: border-color var(--ev-transition), background var(--ev-transition);
 }
 
 .pay-option:hover {
-    border-color: rgba(124, 77, 255, .4);
-    background: rgba(124, 77, 255, .04);
+    border-color: var(--ev-border-focus);
+    background: #f3eafd;
 }
 
 .pay-option.is-selected {
-    border-color: var(--ev-accent);
-    background: rgba(124, 77, 255, .1);
+    border-color: #b890e8;
+    background: linear-gradient(135deg, #f3eafd, #ede3fa);
 }
 
 .pay-option input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--ev-accent);
+    width: 17px;
+    height: 17px;
+    accent-color: var(--ev-purple);
     cursor: pointer;
     flex-shrink: 0;
 }
 
 .pay-option__icon {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     flex-shrink: 0;
 }
 
@@ -550,95 +666,56 @@ body {
 }
 
 .pay-option__name {
-    font-size: .9rem;
+    font-size: .88rem;
     font-weight: 700;
     color: var(--ev-text);
 }
 
 .pay-option__desc {
-    font-size: .75rem;
-    color: var(--ev-muted);
+    font-size: .72rem;
+    color: var(--ev-text-muted);
     margin-top: 2px;
 }
 
-/* Pay-modal amount summary */
-.pay-modal__amount {
-    background: var(--ev-card);
-    border: 1px solid var(--ev-border);
-    border-radius: var(--radius-sm);
-    padding: 14px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: .9rem;
-}
-
-.pay-modal__amount-label {
-    color: var(--ev-muted);
-}
-
-.pay-modal__amount-value {
-    font-weight: 800;
-    font-size: 1.1rem;
-    color: var(--ev-accent);
-}
-
-/* Book button */
+/* ── Book Now button (payment modal) ────────────── */
 .pay-book-btn {
     width: 100%;
-    padding: 15px;
-    font-family: var(--font);
-    font-size: 1rem;
+    padding: 14px;
+    font-family: var(--ev-font);
+    font-size: .97rem;
     font-weight: 700;
     color: #fff;
-    background: linear-gradient(135deg, var(--ev-accent) 0%, #ff6b8a 100%);
+    background: linear-gradient(135deg, #8b4cc8, #5a2d82);
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: var(--ev-radius-md);
     cursor: pointer;
-    transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
-    box-shadow: 0 4px 20px var(--ev-accent-glow);
-    letter-spacing: .5px;
+    transition: all var(--ev-transition);
+    box-shadow: var(--ev-shadow-btn);
+    letter-spacing: .3px;
 }
 
 .pay-book-btn:disabled {
-    opacity: .35;
+    background: #d5c8e8;
+    color: #a896bc;
     cursor: not-allowed;
+    box-shadow: none;
     transform: none !important;
-    box-shadow: none !important;
 }
 
 .pay-book-btn:not(:disabled):hover {
-    opacity: .9;
+    background: linear-gradient(135deg, #9d5de0, #6b3da6);
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px var(--ev-accent-glow);
+    box-shadow: var(--ev-shadow-btn-h);
 }
 
-/* ---- Loading/success overlay ------------------------------------------ */
-.bk-no-selection {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--ev-muted);
-    font-size: .95rem;
+.pay-book-btn:not(:disabled):active {
+    transform: translateY(0);
 }
 
-.bk-no-selection .icon {
-    font-size: 2.5rem;
-    margin-bottom: 12px;
-    display: block;
-}
-
-/* ---- Dividers --------------------------------------------------------- */
-.bk-divider {
-    border: none;
-    border-top: 1px solid var(--ev-border);
-    margin: 32px 0;
-}
-
-/* ---- Responsive tweaks ------------------------------------------------ */
+/* ── Responsive ─────────────────────────────────── */
 @media (max-width: 640px) {
     .bk-page {
-        padding: 24px 16px 80px;
+        padding: 22px 14px 80px;
     }
 
     .bk-summary-card {
@@ -646,10 +723,14 @@ body {
     }
 
     .bk-pkg-name {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
+    }
+
+    .bk-price-amount {
+        font-size: 1.6rem;
     }
 
     .pay-modal {
-        padding: 28px 20px;
+        padding: 28px 18px 24px;
     }
 }

@@ -105,7 +105,7 @@
                 @forelse($services as $svc)
                     <span class="bk-service-tag">{{ $svc }}</span>
                 @empty
-                    <span style="color:var(--ev-muted); font-size:.85rem;">No services selected.</span>
+                    <span style="color:#7a6091; font-size:.85rem;">No services selected.</span>
                 @endforelse
             </div>
         </div>
@@ -194,7 +194,7 @@
             @if(empty($services))
                 <div class="bk-no-selection">
                     <span class="icon">📋</span>
-                    No services were selected. <a href="/#packages" style="color:var(--ev-accent)">Go back</a> and choose a package.
+                    No services were selected. <a href="/#packages" style="color:#8b4cc8; font-weight:600;">Go back</a> and choose a package.
                 </div>
             @else
                 <div class="subsvc-accordion" id="subsvcAccordion">
