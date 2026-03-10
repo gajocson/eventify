@@ -198,17 +198,68 @@
             });
         });
 
-        // Book button click — finalized booking
-        bookBtn.addEventListener('click', () => {
-            closePayModal();
-            // Show success feedback
-            if (typeof window.showToast === 'function') {
-                window.showToast('success', '🎉 Booking confirmed! Our team will be in touch soon.', 6000);
-            } else {
-                alert('🎉 Booking confirmed! Our team will be in touch soon.');
+        // Book button click — submit booking via AJAX then redirect
+        bookBtn.addEventListener('click', async () => {
+            bookBtn.disabled = true;
+            bookBtn.textContent = 'Saving…';
+
+            // Collect selected sub-services
+            const subServices = [];
+            document.querySelectorAll('.subsvc-cbx:checked').forEach(cb => {
+                subServices.push({
+                    label: cb.dataset.label || '',
+                    price: parseFloat(cb.dataset.price) || 0,
+                });
+            });
+
+            const payload = {
+                package_name:   window.BOOKING_DATA?.package || '',
+                services:       window.BOOKING_DATA?.services || [],
+                sub_services:   subServices,
+                guest_count:    parseInt(document.getElementById('bkGuestCount')?.value, 10) || 0,
+                event_date:     document.getElementById('bkEventDate')?.value || '',
+                total_price:    computeTotal(),
+                payment_method: document.querySelector('input[name="payment_method"]:checked')?.value || '',
+            };
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+            try {
+                const res = await fetch('/booking/store', {
+                    method:  'POST',
+                    headers: {
+                        'Content-Type':     'application/json',
+                        'Accept':           'application/json',
+                        'X-CSRF-TOKEN':     csrfToken,
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                const data = await res.json();
+
+                closePayModal();
+
+                if (res.ok && data.success) {
+                    if (typeof window.showToast === 'function') {
+                        window.showToast('success', '🎉 Booking confirmed! Our team will be in touch soon.', 6000);
+                    } else {
+                        alert('🎉 Booking confirmed! Our team will be in touch soon.');
+                    }
+                    setTimeout(() => { window.location.href = '/'; }, 2200);
+                } else {
+                    throw new Error(data.message || 'Something went wrong.');
+                }
+
+            } catch (err) {
+                bookBtn.disabled = false;
+                bookBtn.textContent = 'Book Now';
+                if (typeof window.showToast === 'function') {
+                    window.showToast('error', '❌ ' + (err.message || 'Could not save booking. Please try again.'), 5000);
+                } else {
+                    alert('Error: ' + err.message);
+                }
             }
-            // Redirect home after brief delay
-            setTimeout(() => { window.location.href = '/'; }, 2000);
         });
     }
 

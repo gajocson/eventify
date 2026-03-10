@@ -32,9 +32,12 @@ Route::get('/auth/user',    [AuthController::class, 'authUser'])->name('auth.use
 Route::middleware(['auth:customer', 'customer.only'])->group(function () {
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     Route::post('/booking', [BookingController::class, 'show'])->name('booking.show');
+    Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 });
 
 // ─── Admin-only routes ─────────────────────────────────────────────────────────
 Route::middleware(['auth:customer', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::patch('/admin/bookings/{id}/message', [AdminController::class, 'sendMessage'])->name('admin.booking.message');
+    Route::patch('/admin/bookings/{id}/status', [AdminController::class, 'updateStatus'])->name('admin.booking.status');
 });
