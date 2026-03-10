@@ -92,7 +92,34 @@ class AuthController extends Controller
     public function profile()
     {
         $user = Auth::guard('customer')->user();
-        return view('profile', compact('user'));
+
+        // Load all bookings with their messages
+        $allBookings = \App\Models\EventBooking::with(['messages'])
+            ->where('customer_id', $user->customer_id)
+            ->orderByDesc('created_at')
+            ->get();
+
+        // Current = pending or confirmed
+        $currentBookings = $allBookings->filter(function ($b) {
+            return in_array($b->status, ['pending', 'confirmed']);
+        })->values();
+
+        // History = cancelled or completed
+        $historyBookings = $allBookings->filter(function ($b) {
+            return !in_array($b->status, ['pending', 'confirmed']);
+        })->values();
+
+        // Bookings that have at least one message (for messages tab)
+        $messageBookings = $allBookings->filter(function ($b) {
+            return $b->messages->count() > 0;
+        })->values();
+
+        return view('profile', compact(
+            'user',
+            'currentBookings',
+            'historyBookings',
+            'messageBookings'
+        ));
     }
 
     // ─────────────────────────────────────────────

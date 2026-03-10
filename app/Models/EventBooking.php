@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\BookingMessage;
+
 
 class EventBooking extends Model
 {
@@ -34,6 +36,14 @@ class EventBooking extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'customer_id');
+    }
+
+    /**
+     * All messages in the conversation thread for this booking.
+     */
+    public function messages()
+    {
+        return $this->hasMany(BookingMessage::class, 'booking_id')->orderBy('created_at');
     }
 
     /**

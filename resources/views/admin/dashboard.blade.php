@@ -454,6 +454,64 @@
         }
         .admin-signout-btn:hover { background: rgba(192, 51, 74, 0.15); transform: translateY(-2px); }
 
+        /* ── Message thread inside modal ── */
+        .adm-thread {
+            max-height: 280px;
+            overflow-y: auto;
+            padding: 10px 0;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .adm-thread::-webkit-scrollbar { width: 4px; }
+        .adm-thread::-webkit-scrollbar-track { background: transparent; }
+        .adm-thread::-webkit-scrollbar-thumb { background: rgba(139,76,200,.2); border-radius:10px; }
+
+        .adm-bubble {
+            display: flex;
+            flex-direction: column;
+        }
+        .adm-bubble--admin    { align-items: flex-end; }
+        .adm-bubble--customer { align-items: flex-start; }
+
+        .adm-bubble__name {
+            font-size: .65rem;
+            font-weight: 700;
+            color: #a08ab8;
+            margin-bottom: 2px;
+        }
+
+        .adm-bubble__content {
+            max-width: 85%;
+            padding: 9px 13px;
+            border-radius: 13px;
+            font-size: .82rem;
+            line-height: 1.5;
+        }
+        .adm-bubble--admin .adm-bubble__content {
+            background: linear-gradient(135deg, #8b4cc8, #5a2d82);
+            color: #fff;
+            border-bottom-right-radius: 3px;
+        }
+        .adm-bubble--customer .adm-bubble__content {
+            background: linear-gradient(135deg, #f3eafd, #ede3fa);
+            color: #1a0a2e;
+            border-bottom-left-radius: 3px;
+        }
+        .adm-bubble__time {
+            font-size: .62rem;
+            color: #b0a0c8;
+            margin-top: 2px;
+        }
+
+        .adm-thread-empty {
+            text-align: center;
+            padding: 16px;
+            color: #a08ab8;
+            font-size: .8rem;
+        }
+
         @media (max-width: 768px) {
             .admin-banner { flex-direction: column; text-align: center; padding: 28px 20px; }
             .admin-page   { padding: 20px 16px 40px; }
@@ -699,40 +757,47 @@
     </div>
 
     {{-- ═══════════════════════════════════════════════
-         CONTACT CUSTOMER MODAL
+         CONTACT CUSTOMER MODAL (with conversation thread)
     ════════════════════════════════════════════════ --}}
     <div class="adm-backdrop" id="bkContactBackdrop">
-        <div class="adm-modal" style="max-width:560px;">
+        <div class="adm-modal" style="max-width:580px;">
             <button class="adm-modal__close" onclick="closeContactModal()">✕</button>
 
-            <h2 class="adm-modal__title">✉️ Contact Customer</h2>
+            <h2 class="adm-modal__title">💬 Conversation</h2>
             <p class="adm-modal__sub" id="contactSubtitle"></p>
 
             {{-- Customer recap --}}
             <div class="adm-info-grid" id="contactCustomerInfo" style="margin-bottom:14px;"></div>
 
             {{-- Booking recap --}}
-            <div style="background:#faf7ff; border:1.5px solid #ede8f5; border-radius:14px; padding:14px 18px; margin-bottom:18px;">
+            <div style="background:#faf7ff; border:1.5px solid #ede8f5; border-radius:14px; padding:14px 18px; margin-bottom:16px;">
                 <div class="adm-info-item__label" style="margin-bottom:8px;">Booking Summary</div>
                 <div id="contactBookingSummary" style="font-size:.85rem; color:#1a0a2e; line-height:1.7;"></div>
                 <div class="adm-tags" id="contactServiceTags" style="margin-top:10px;"></div>
                 <div style="font-size:.78rem; color:#8b4cc8; font-weight:700; margin-top:8px;" id="contactSubSvcList"></div>
             </div>
 
-            {{-- Message --}}
-            <label class="adm-textarea-label" for="contactMessage">Your Message to the Customer</label>
+            {{-- Conversation thread --}}
+            <div class="adm-info-item__label" style="margin-bottom:6px;">Conversation History</div>
+            <div class="adm-thread" id="contactThread">
+                <div class="adm-thread-empty">Loading messages…</div>
+            </div>
+
+            {{-- New message --}}
+            <label class="adm-textarea-label" for="contactMessage">Send Message</label>
             <textarea
                 class="adm-textarea"
                 id="contactMessage"
-                placeholder="Hello! I'm reaching out regarding your booking for [Package Name]..."
+                placeholder="Type your message to the customer…"
+                style="min-height:90px;"
             ></textarea>
 
-            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;">
+            <div style="display:flex; gap:12px; margin-top:14px; flex-wrap:wrap;">
                 <button class="adm-btn adm-btn--primary" id="contactSendBtn" onclick="sendAdminMessage()">
                     📨 Send Message
                 </button>
                 <button class="adm-btn adm-btn--outline" onclick="closeContactModal()">
-                    Cancel
+                    Close
                 </button>
             </div>
         </div>
@@ -883,7 +948,7 @@
             const b = getBooking(activeBookingId);
             if (!b) return;
 
-            document.getElementById('contactSubtitle').textContent = 'Sending message to ' + b.customer_name;
+            document.getElementById('contactSubtitle').textContent = 'Conversation with ' + b.customer_name;
 
             document.getElementById('contactCustomerInfo').innerHTML = `
                 <div class="adm-info-item">
@@ -910,10 +975,54 @@
             document.getElementById('contactSubSvcList').innerHTML =
                 (b.sub_services || []).map(ss => `${ss.label} — ₱${Number(ss.price).toLocaleString('en-PH')}`).join('<br>');
 
-            // Pre-fill any existing message
-            document.getElementById('contactMessage').value = b.admin_message || '';
-
+            document.getElementById('contactMessage').value = '';
             document.getElementById('bkContactBackdrop').classList.add('is-open');
+
+            // Load message thread
+            loadThread(activeBookingId);
+        }
+
+        async function loadThread(bookingId) {
+            const container = document.getElementById('contactThread');
+            container.innerHTML = '<div class="adm-thread-empty">Loading…</div>';
+
+            try {
+                const res  = await fetch(`/admin/bookings/${bookingId}/messages`, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                });
+                const data = await res.json();
+                renderThread(data.messages || []);
+            } catch (e) {
+                container.innerHTML = '<div class="adm-thread-empty">Failed to load messages.</div>';
+            }
+        }
+
+        function renderThread(messages) {
+            const container = document.getElementById('contactThread');
+            if (!messages.length) {
+                container.innerHTML = '<div class="adm-thread-empty">No messages yet. Send the first message below.</div>';
+                return;
+            }
+            container.innerHTML = messages.map(m => `
+                <div class="adm-bubble adm-bubble--${m.sender_type}">
+                    <div class="adm-bubble__name">${m.sender_name}</div>
+                    <div class="adm-bubble__content">${escapeHtml(m.message)}</div>
+                    <div class="adm-bubble__time">${m.created_at}</div>
+                </div>
+            `).join('');
+            // Scroll to bottom
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
         }
 
         function closeContactModal() {
@@ -955,27 +1064,45 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                         'X-Requested-With': 'XMLHttpRequest',
                     },
-                    body: JSON.stringify({ admin_message: message }),
+                    body: JSON.stringify({ message }),
                 });
 
                 const data = await res.json();
 
                 if (res.ok && data.success) {
+                    const m = data.message_obj;
+
                     // Update local state
                     const b = getBooking(activeBookingId);
                     if (b) b.admin_message = message;
 
-                    // Update message display in detail modal
+                    // Append bubble to thread
+                    const container = document.getElementById('contactThread');
+                    const emptyEl   = container.querySelector('.adm-thread-empty');
+                    if (emptyEl) emptyEl.remove();
+
+                    const bubble = document.createElement('div');
+                    bubble.className = 'adm-bubble adm-bubble--admin';
+                    bubble.innerHTML = `
+                        <div class="adm-bubble__name">Admin</div>
+                        <div class="adm-bubble__content">${escapeHtml(m.message)}</div>
+                        <div class="adm-bubble__time">${m.created_at}</div>
+                    `;
+                    container.appendChild(bubble);
+                    container.scrollTop = container.scrollHeight;
+
+                    document.getElementById('contactMessage').value = '';
+
+                    // Update admin message in detail modal
                     const msgWrap = document.getElementById('bkDetailAdminMsg');
                     document.getElementById('bkDetailAdminMsgText').textContent = message;
                     msgWrap.style.display = 'block';
 
-                    closeContactModal();
                     if (typeof window.showToast === 'function') {
-                        window.showToast('success', '✅ Message saved successfully!', 4000);
+                        window.showToast('success', '✅ Message sent successfully!', 4000);
                     }
                 } else {
-                    throw new Error(data.message || 'Could not save message.');
+                    throw new Error(data.message || 'Could not send message.');
                 }
             } catch(err) {
                 if (typeof window.showToast === 'function') {

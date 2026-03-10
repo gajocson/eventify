@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\EventBooking;
+use App\Models\BookingMessage;
+
 
 class Customer extends Authenticatable
 {
@@ -39,4 +42,21 @@ class Customer extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * All event bookings made by this customer.
+     */
+    public function bookings()
+    {
+        return $this->hasMany(EventBooking::class, 'customer_id', 'customer_id');
+    }
+
+    /**
+     * All messages sent by this customer.
+     */
+    public function messages()
+    {
+        return $this->hasMany(BookingMessage::class, 'sender_id', 'customer_id')
+                    ->where('sender_type', 'customer');
+    }
 }
