@@ -22,10 +22,7 @@
         </div>
 
         {{-- Right: Globe + Burger --}}
-        <div class="nav-right">
-            <button class="globe-btn" aria-label="Language">
-                <span class="material-symbols-outlined">language</span>
-            </button>
+
 
             <div class="burger" id="burger" aria-label="Menu" role="button" tabindex="0">
                 <span></span>
@@ -127,33 +124,5 @@
             </div>{{-- end #menu --}}
         </div>{{-- end nav-right --}}
     </nav>{{-- end header-nav --}}
-
-    {{-- Row 2: Search bar --}}
-    <div class="header-search">
-        <form class="search-pill" action="#" method="GET" id="mainSearchForm">
-            <div class="search-field" id="search-where">
-                <label for="input-where">
-                    <span class="material-symbols-outlined search-field-icon">location_on</span>
-                </label>
-                <div class="search-field-text">
-                    <span class="search-field-label">Where</span>
-                    <input type="text" id="input-where" name="where" placeholder="City, venue or area…" autocomplete="off">
-                </div>
-            </div>
-            <div class="search-divider"></div>
-            <div class="search-field" id="search-what">
-                <label for="input-what">
-                    <span class="material-symbols-outlined search-field-icon">star</span>
-                </label>
-                <div class="search-field-text">
-                    <span class="search-field-label">What</span>
-                    <input type="text" id="input-what" name="what" placeholder="Package, service or event type…" autocomplete="off">
-                </div>
-            </div>
-            <button type="submit" class="search-btn" aria-label="Search">
-                <span class="material-symbols-outlined">search</span>
-            </button>
-        </form>
-    </div>
 
 </header>

@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_top_div.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Homepage CSS/homePage_mid_div.css') }}">
@@ -34,7 +36,7 @@
             <div class="hero-banner__overlay"></div>
             <div class="hero-banner__content">
                 <span class="hero-banner__tagline">Discover · Plan · Celebrate</span>
-                <h1 class="hero-banner__headline">Where Great Events Begin</h1>
+                <h1 class="hero-banner__headline">Create Moments That Matter</h1>
                 <a href="#packages" class="hero-banner__cta">Browse Packages</a>
             </div>
         </div>
