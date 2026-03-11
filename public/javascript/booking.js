@@ -8,80 +8,13 @@
     'use strict';
 
     /* ──────────────────────────────────────────────
-       Sub-service data: label + base price (₱)
-    ────────────────────────────────────────────── */
-    const SUB_SERVICES = {
-        'Furniture and Set‑up': [
-            { id: 'fs-tables', label: 'Tables', price: 500 },
-            { id: 'fs-chairs', label: 'Chairs', price: 300 },
-            { id: 'fs-linens', label: 'Tablecloths & linens', price: 200 },
-            { id: 'fs-covers', label: 'Chair covers & ribbons', price: 150 },
-            { id: 'fs-stage', label: 'Stage / platform', price: 1500 },
-            { id: 'fs-podium', label: 'Podium / lectern', price: 800 },
-            { id: 'fs-tents', label: 'Tents & canopies', price: 2000 },
-            { id: 'fs-backdrop', label: 'Backdrop / event backdrop', price: 1200 },
-            { id: 'fs-decor', label: 'Decorations & centerpieces', price: 900 },
-        ],
-        'Audio and Visual': [
-            { id: 'av-sound', label: 'Sound system', price: 3000 },
-            { id: 'av-wiredmic', label: 'Wired microphones', price: 400 },
-            { id: 'av-wirelessmic', label: 'Wireless microphones', price: 600 },
-            { id: 'av-speakers', label: 'Speakers & monitors', price: 1200 },
-            { id: 'av-mixer', label: 'Mixer / audio console', price: 800 },
-            { id: 'av-projector', label: 'Projector', price: 1500 },
-            { id: 'av-screen', label: 'Projector screen / LED screen', price: 1800 },
-            { id: 'av-stagelights', label: 'Stage lights & spotlights', price: 2000 },
-            { id: 'av-uplighting', label: 'LED uplighting', price: 1000 },
-        ],
-        'Food and Catering': [
-            { id: 'fc-catering', label: 'Catering service (full-service staff)', price: 5000 },
-            { id: 'fc-buffet', label: 'Buffet tables', price: 800 },
-            { id: 'fc-warmers', label: 'Food warmers / chafing dishes', price: 600 },
-            { id: 'fc-plates', label: 'Plates, utensils & glasses', price: 500 },
-            { id: 'fc-napkins', label: 'Napkins (cloth & paper)', price: 200 },
-            { id: 'fc-drinks', label: 'Drink dispensers & water stations', price: 400 },
-            { id: 'fc-dessert', label: 'Dessert / cake display table', price: 700 },
-        ],
-        'Decorations and Theme': [
-            { id: 'dt-balloon', label: 'Balloon arches & columns', price: 1500 },
-            { id: 'dt-flowers', label: 'Fresh flower arrangements', price: 2000 },
-            { id: 'dt-photobooth', label: 'Photo booth setup', price: 3000 },
-            { id: 'dt-props', label: 'Props & themed items', price: 800 },
-            { id: 'dt-signage', label: 'Welcome signage / boards', price: 600 },
-            { id: 'dt-fairylights', label: 'Fairy lights & string lights', price: 900 },
-            { id: 'dt-colortheme', label: 'Custom color theme styling', price: 1200 },
-        ],
-        'Entertainment': [
-            { id: 'ent-dj', label: 'Professional DJ', price: 5000 },
-            { id: 'ent-band', label: 'Live band performance', price: 8000 },
-            { id: 'ent-solo', label: 'Solo performers (singer, acoustic)', price: 3000 },
-            { id: 'ent-games', label: 'Games & group activities', price: 1500 },
-            { id: 'ent-emcee', label: 'Emcee / host services', price: 2500 },
-            { id: 'ent-slideshow', label: 'Slideshow / video presentation', price: 1200 },
-            { id: 'ent-magic', label: 'Magic shows & special acts', price: 3500 },
-        ],
-    };
-
-    /* Normalise incoming service labels from packages.js
-       (they can have slight formatting differences) */
-    const KEY_MAP = {
-        'furniture and set‑up': 'Furniture and Set‑up',
-        'furniture and setup': 'Furniture and Set‑up',
-        'audio and visual': 'Audio and Visual',
-        'food and catering': 'Food and Catering',
-        'decorations and theme': 'Decorations and Theme',
-        'entertainment': 'Entertainment',
-    };
-
-    function normaliseKey(label) {
-        return KEY_MAP[label.toLowerCase()] || label;
-    }
-
-    /* ──────────────────────────────────────────────
        Pricing helpers
     ────────────────────────────────────────────── */
-    const BASE_GUEST = 50;
-    const EXTRA_GUEST_RATE = 50; // ₱ per guest above 50
+    const BASE_GUEST = 30;
+    const EXTRA_GUEST_RATE = 100; // ₱ per guest above 30 (packages only)
+
+    // Whether this is an ala-carte booking (set via window.BOOKING_DATA.isAlaCarte in Blade)
+    const isAlaCarte = !!(window.BOOKING_DATA && window.BOOKING_DATA.isAlaCarte);
 
     function formatPHP(n) {
         return '₱' + n.toLocaleString('en-PH');
@@ -94,8 +27,12 @@
             base += parseFloat(cb.dataset.price) || 0;
         });
 
-        const guests = parseInt(document.getElementById('bkGuestCount').value, 10) || 0;
-        const extra = Math.max(0, guests - BASE_GUEST) * EXTRA_GUEST_RATE;
+        // Guest surcharge only applies to package bookings, not ala-carte
+        let extra = 0;
+        if (!isAlaCarte) {
+            const guests = parseInt(document.getElementById('bkGuestCount').value, 10) || 0;
+            extra = Math.max(0, guests - BASE_GUEST) * EXTRA_GUEST_RATE;
+        }
 
         return base + extra;
     }

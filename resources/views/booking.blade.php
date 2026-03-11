@@ -24,14 +24,15 @@
     window.BOOKING_DATA = {
         package:  @json($package),
         services: @json($services),
+        isAlaCarte: {{ Str::startsWith($package, 'Ala Carte') ? 'true' : 'false' }},
         catalogue: {
             "Furniture and Set\u2011up": [
-                { id:"fs-tables",    label:"Tables",                      price:2000  },
-                { id:"fs-chairs",    label:"Chairs",                      price:1800  },
-                { id:"fs-linens",    label:"Tablecloths \u0026 linens",   price:1000  },
+                { id:"fs-tables",    label:"Tables",                      price:2000 },
+                { id:"fs-chairs",    label:"Chairs",                      price:1800 },
+                { id:"fs-linens",    label:"Tablecloths \u0026 linens",   price:1000 },
                 { id:"fs-covers",    label:"Chair covers \u0026 ribbons", price:800  },
                 { id:"fs-stage",     label:"Stage \/ platform",           price:5000 },
-                { id:"fs-podium",    label:"Podium \/ lectern",           price:4500  },
+                { id:"fs-podium",    label:"Podium \/ lectern",           price:4500 },
                 { id:"fs-tents",     label:"Tents \u0026 canopies",       price:3000 },
                 { id:"fs-backdrop",  label:"Backdrop \/ event backdrop",  price:2000 },
                 { id:"fs-decor",     label:"Decorations \u0026 centerpieces", price:2500 }
@@ -151,15 +152,15 @@
 
                 $subServices = [
                     'Furniture and Set‑up' => [
-                        ['id'=>'fs-tables',    'label'=>'Tables',                       'price'=>500 ],
-                        ['id'=>'fs-chairs',    'label'=>'Chairs',                       'price'=>300 ],
-                        ['id'=>'fs-linens',    'label'=>'Tablecloths & linens',         'price'=>200 ],
-                        ['id'=>'fs-covers',    'label'=>'Chair covers & ribbons',       'price'=>150 ],
-                        ['id'=>'fs-stage',     'label'=>'Stage / platform',             'price'=>1500],
-                        ['id'=>'fs-podium',    'label'=>'Podium / lectern',             'price'=>800 ],
-                        ['id'=>'fs-tents',     'label'=>'Tents & canopies',             'price'=>2000],
-                        ['id'=>'fs-backdrop',  'label'=>'Backdrop / event backdrop',   'price'=>1200],
-                        ['id'=>'fs-decor',     'label'=>'Decorations & centerpieces',  'price'=>900 ],
+                        ['id'=>'fs-tables',    'label'=>'Tables',                       'price'=>2000],
+                        ['id'=>'fs-chairs',    'label'=>'Chairs',                       'price'=>1800],
+                        ['id'=>'fs-linens',    'label'=>'Tablecloths & linens',         'price'=>1000],
+                        ['id'=>'fs-covers',    'label'=>'Chair covers & ribbons',       'price'=>800 ],
+                        ['id'=>'fs-stage',     'label'=>'Stage / platform',             'price'=>5000],
+                        ['id'=>'fs-podium',    'label'=>'Podium / lectern',             'price'=>4500],
+                        ['id'=>'fs-tents',     'label'=>'Tents & canopies',             'price'=>3000],
+                        ['id'=>'fs-backdrop',  'label'=>'Backdrop / event backdrop',   'price'=>2000],
+                        ['id'=>'fs-decor',     'label'=>'Decorations & centerpieces',  'price'=>2500],
                     ],
                     'Audio and Visual' => [
                         ['id'=>'av-sound',       'label'=>'Sound system',                  'price'=>3000],
@@ -286,7 +287,11 @@
         <div class="bk-price-card">
             <div>
                 <div class="bk-price-label">Estimated Total</div>
-                <div class="bk-price-sub">Base price of sub-services + ₱50 per guest above 50</div>
+                @if(Str::startsWith($package, 'Ala Carte'))
+                    <div class="bk-price-sub">Sum of selected sub-service prices (guest count not included)</div>
+                @else
+                    <div class="bk-price-sub">Sub-service prices + ₱100 per guest above 30</div>
+                @endif
             </div>
             <div class="bk-price-amount" id="bkTotalAmount">₱0</div>
         </div>

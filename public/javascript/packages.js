@@ -208,6 +208,16 @@
                             <div class="booking-tags"></div>
                         </div>
                     </div>
+                    <div class="booking-summary__row booking-summary__row--note">
+                        <span class="booking-summary__icon">💡</span>
+                        <div>
+                            <div class="booking-summary__key">Pricing</div>
+                            <div class="booking-summary__val" style="font-size:.85rem;color:#7a6091;">
+                                Sub-service prices &amp; totals are set on the next page.<br>
+                                Guest count affects the final price for package bookings.
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <button class="booking-confirm-btn" id="bookingConfirmBtn">Confirm Booking</button>
                 <button class="booking-back-btn" id="bookingBackBtn">← Change Services</button>
